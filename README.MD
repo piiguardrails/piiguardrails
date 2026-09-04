@@ -7,7 +7,7 @@
 [![PyPI Version](https://img.shields.io/pypi/v/piiguardrails?color=blue&label=PyPI%20Package)](https://pypi.org/project/piiguardrails/)
 [![Python Version](https://img.shields.io/badge/python-%3E%3D%203.8-3776AB?logo=python&logoColor=white)](https://pypi.org/project/piiguardrails/)
 [![Security](https://img.shields.io/badge/Security-AES--256%20SQLCipher-blueviolet)](https://github.com/piiguardrails/piiguardrails)
-[![Platform](https://img.shields.io/badge/platform-Windows%20x64-0078D4?logo=windows&logoColor=white)](https://pypi.org/project/piiguardrails/)
+[![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20Linux%20x64-0078D4?logo=linux&logoColor=white)](https://pypi.org/project/piiguardrails/)
 
 <br/>
 
@@ -124,7 +124,7 @@ print("Restored response:", unmask_response["unmasked_text"])
 
 ## 📋 System Requirements
 
-- **Operating System**: Windows 10, Windows 11, Windows Server (64-bit)
+- **Operating System**: Windows 10, Windows 11, Windows Server (64-bit) or Linux (Ubuntu, Debian, RHEL, CentOS, Fedora, Rocky, Arch, WSL2 x86_64)
 - **Python**: `>= 3.8` (or `uv`)
 - **Memory**: Minimum 2 GB RAM
 - **Port**: Default `8000` (configurable via `.env` or `--port`)
