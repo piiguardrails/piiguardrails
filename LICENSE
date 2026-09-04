@@ -1,0 +1,35 @@
+﻿ENTERPRISE SOFTWARE LICENSE AND EVALUATION AGREEMENT
+
+PLEASE READ THIS ENTERPRISE SOFTWARE LICENSE AND EVALUATION AGREEMENT ("AGREEMENT") CAREFULLY BEFORE INSTALLING, DOWNLOADING, OR USING ENTERPRISE PII GUARDRAILS STUDIO ("SOFTWARE").
+
+BY DOWNLOADING, INSTALLING, OR USING THE SOFTWARE, YOU ("LICENSEE" OR "CUSTOMER") AGREE TO BE BOUND BY THE TERMS OF THIS AGREEMENT. IF YOU DO NOT AGREE TO THE TERMS OF THIS AGREEMENT, DO NOT INSTALL, DOWNLOAD, OR USE THE SOFTWARE.
+
+1. GRANT OF LICENSE
+Subject to the terms and conditions of this Agreement, Licensor grants to Licensee a non-exclusive, non-transferable, revocable license to install and execute the Software:
+(a) Evaluation & Community Use: Licensee may use the Software without a paid commercial license solely for internal evaluation, testing, or standard quota-limited usage as designated in the Software documentation.
+(b) Enterprise Commercial Production: Use of the Software for commercial production, higher payload thresholds, custom rule sets, or expanded multi-user quotas requires an active, valid commercial license key issued by Licensor.
+
+2. LICENSE RESTRICTIONS
+Licensee shall not, and shall not permit any third party to:
+(a) Decompile, disassemble, reverse engineer, decrypt, or attempt to derive the source code, underlying algorithms, or trade secrets of the Software or its obfuscated components;
+(b) Bypass, modify, defeat, or circumvent any license enforcement mechanisms, hardware identification (HWID) checks, cryptographic verification routines, or quota limiters embedded within the Software;
+(c) Sell, rent, lease, sublicense, distribute, outsource, timeshare, or white-label the Software to any third party without express prior written consent from Licensor;
+(d) Remove, alter, or obscure any proprietary notices, trademarks, or copyright designations on or within the Software or its documentation.
+
+3. INTELLECTUAL PROPERTY RIGHTS
+The Software, including all code, algorithms, models, architecture, documentation, and graphical assets, is and remains the sole and exclusive proprietary property of Licensor and its suppliers. The Software is licensed, not sold. All rights not expressly granted to Licensee are reserved by Licensor.
+
+4. DATA PRIVACY & ZERO RETENTION
+The Software is designed for local, on-premise execution. Licensor does not collect, inspect, intercept, store, or transmit any customer data, text payloads, Personally Identifiable Information (PII), or model outputs processed by the Software. All cryptographic database keys and audit logs remain strictly within Licensee's local deployment infrastructure.
+
+5. DISCLAIMER OF WARRANTIES
+THE SOFTWARE IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EXPRESS, IMPLIED, STATUTORY, OR OTHERWISE. LICENSOR SPECIFICALLY DISCLAIMS ALL IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT. LICENSOR DOES NOT WARRANT THAT THE OPERATION OF THE SOFTWARE WILL BE UNINTERRUPTED, REDACTION WILL BE 100% EXHAUSTIVE ACROSS ALL UNFORESEEN INPUT FORMATS, OR DEFECT-FREE.
+
+6. LIMITATION OF LIABILITY
+TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, IN NO EVENT SHALL LICENSOR OR ITS CONTRIBUTORS BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, PUNITIVE, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES, LOSS OF USE, DATA, PROFITS, BUSINESS INTERRUPTION, OR REGULATORY FINES) ARISING OUT OF OR IN CONNECTION WITH THE USE OR INABILITY TO USE THE SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGES. IN NO EVENT SHALL LICENSOR'S TOTAL AGGREGATE LIABILITY EXCEED THE TOTAL AMOUNTS ACTUALLY PAID BY LICENSEE TO LICENSOR FOR THE SOFTWARE IN THE TWELVE (12) MONTHS PRECEDING THE CLAIM.
+
+7. TERMINATION
+This Agreement is effective until terminated. Licensee may terminate it at any time by ceasing all use and destroying all copies of the Software. Licensor may terminate this Agreement immediately upon written notice if Licensee breaches any provision of this Agreement, including non-payment of commercial license fees or violation of Section 2 restrictions.
+
+8. MISCELLANEOUS
+This Agreement constitutes the entire agreement between the parties concerning the subject matter hereof and supersedes all prior agreements, representations, and understandings. If any provision is held invalid or unenforceable, the remaining provisions shall continue in full force and effect.
