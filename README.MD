@@ -1,47 +1,127 @@
 <div align="center">
 
-# 🛡️ Enterprise PII Guardrails Studio
+# 🛡️ Enterprise PII Guardrails Studio (v2.0.4)
 
-**High-Performance, Zero-Leak AI Privacy Gateway for Enterprise LLM Pipelines**
+**High-Performance, Zero-Leak AI Privacy Gateway & Management Studio for Enterprise LLM Pipelines**
 
 [![PyPI Version](https://img.shields.io/pypi/v/piiguardrails?color=blue&label=PyPI%20Package)](https://pypi.org/project/piiguardrails/)
 [![Python Version](https://img.shields.io/badge/python-%3E%3D%203.8-3776AB?logo=python&logoColor=white)](https://pypi.org/project/piiguardrails/)
-[![Security](https://img.shields.io/badge/Security-AES--256%20SQLCipher-blueviolet)](https://github.com/piiguardrails/piiguardrails)
+[![Security](https://img.shields.io/badge/Security-AES--256%20SQLCipher%20%7C%20Ed25519-blueviolet)](https://github.com/prajapativ/LLM_Guardrails)
+[![Performance](https://img.shields.io/badge/Latency-%3C25ms%20In--Memory-brightgreen)](https://github.com/prajapativ/LLM_Guardrails)
 [![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20Linux%20x64-0078D4?logo=linux&logoColor=white)](https://pypi.org/project/piiguardrails/)
+[![License](https://img.shields.io/badge/License-Commercial%20%2F%20Evaluation-orange)](LICENSE)
 
 <br/>
 
-[**PyPI Package**](https://pypi.org/project/piiguardrails/) • [**Documentation**](https://github.com/piiguardrails/piiguardrails#readme) • [**Report Issue**](https://github.com/piiguardrails/piiguardrails/issues)
+[**PyPI Package**](https://pypi.org/project/piiguardrails/) • [**API Reference**](docs/API_REFERENCE.md) • [**Licensing & Node-Locking**](LICENSING_GUIDE.md) • [**Disaster Recovery**](docs/BACKUP_AND_DISASTER_RECOVERY.md) • [**Report Issue**](https://github.com/prajapativ/LLM_Guardrails/issues)
 
 </div>
 
 ---
 
+## 📸 The Enterprise Studio in Action
+
+### Interactive PII Playground (Live Detection with Visual Highlight Pills)
+Inspect, scrub, and redact sensitive entities with sub-25ms latency. Visual badge pills pinpoint exactly what the engine detected before it ever leaves your network.
+
+![Interactive PII Playground](docs/assets/hero_playground.png)
+
+<br/>
+
+<details>
+<summary><b>🔍 Expand to View Additional Studio Screenshots</b></summary>
+
+<br/>
+
+#### 1. Deterministic Safe Payload Output (`/mask`)
+Transformed prompt ready for LLM consumption with reversible placeholder tokens (`<PERSON_1>`, `<SSN_1>`, `<CREDIT_CARD_1>`).
+
+![Safe Payload View](docs/assets/safe_payload_view.png)
+
+#### 2. Node-Locked Enterprise Licensing & Hardware ID Management
+Cryptographically bound to your server hardware using Ed25519 signatures with zero external network phone-home requirement.
+
+![License Management](docs/assets/license_management.png)
+
+#### 3. 30+ Entity Recognizers & Rule Engine
+Granular toggles for Financial, Healthcare, IT Security, and Core PII with configurable replacement strategies (Replace, Mask, Hash, Redact).
+
+![Guardrail Profiles](docs/assets/guardrail_profiles.png)
+
+#### 4. Real-Time Threat Intelligence & IoC Shield
+Interception firewall blocking malicious IP addresses, phishing domains, and credential leaks before evaluation.
+
+![Threat Intelligence](docs/assets/threat_intelligence.png)
+
+#### 5. Enterprise Authentication Portal
+Encrypted session management, role-based access control, and customizable enterprise branding.
+
+![Login Screen](docs/assets/login_screen.png)
+
+</details>
+
+---
+
 ## ⚡ Overview
 
-**Enterprise PII Guardrails Studio** is an ultra-fast, defense-in-depth privacy gateway designed to intercept, detect, mask, and pseudonymize Personally Identifiable Information (PII) before it ever touches public LLM APIs (OpenAI, Anthropic, Gemini) or third-party vector databases.
+**Enterprise PII Guardrails Studio** is an ultra-fast, defense-in-depth privacy gateway designed to intercept, detect, mask, and pseudonymize Personally Identifiable Information (PII) before it reaches third-party LLM APIs (OpenAI, Anthropic, Google Gemini, Azure OpenAI) or internal vector databases.
 
-Equipped with an in-memory authorization cache, asynchronous audit pipeline, and multi-tier regex + NLP models, it sustains **sub-25ms live masking latency** while safeguarding compliance with **GDPR, HIPAA, PCI-DSS, and CCPA**.
+### Why Enterprise Engineering Teams Choose This Gateway:
+- **Sub-25ms Live Masking**: In-memory LRU authorization cache and non-blocking asynchronous audit pipeline.
+- **Zero-Leak Guarantee at Rest**: Database, API keys, and audit logs are encrypted using **SQLCipher AES-256-CBC**.
+- **SHA-256 Cryptographic Verification**: Every downloaded runtime engine is verified on the fly against official SHA-256 hashes prior to execution.
+- **Node-Locked Licensing (v4)**: Commercial licenses are cryptographically locked to the host's **Server Hardware ID** via Ed25519 asymmetric signatures—operating 100% offline with zero cloud dependency.
+- **Bi-Directional Token Restoration**: Effortlessly restore LLM responses (`/unmask`) back to original values for authorized end users.
+
+---
+
+## 🔄 How It Works (Zero-Trust Pipeline)
+
+```mermaid
+sequenceDiagram
+    autonumber
+    actor User as Client / App
+    participant GW as PII Guardrail Gateway
+    participant Cache as In-Memory Auth Cache
+    participant Engine as Multi-Tier PII Recognizer
+    participant DB as SQLCipher AES-256
+    participant LLM as External LLM (OpenAI / Anthropic)
+
+    User->>GW: POST /mask (Prompt with sensitive PII)
+    GW->>Cache: Verify X-API-Key (< 0.1ms)
+    GW->>Engine: Scan regex rules + NLP entities
+    Engine->>DB: Asynchronously store reversible tokens & mapping
+    GW-->>User: Return Safe Payload (<PERSON_1>, <SSN_1>)
+    
+    User->>LLM: Send sanitized payload
+    LLM-->>User: Return completion with tokens
+    
+    User->>GW: POST /unmask (LLM output + mapping vault)
+    GW-->>User: Return restored response with real entity values
+```
 
 ---
 
 ## 🚀 Quickstart
 
-### Method 1: Using `pip` (Standard Python)
+### Method 1: Using `pip` (Recommended)
 
 ```bash
-# 1. Install from PyPI
+# 1. Install the official PyPI package
 pip install piiguardrails
 
 # 2. Launch the studio
 piiguardrails
 ```
 
+On first launch, `piiguardrails` automatically streams the core binary, verifies its **SHA-256 cryptographic checksum**, provisions your encrypted database, and opens the studio dashboard on:
+👉 **`http://localhost:8000`**
+
 ---
 
 ### Method 2: Using `uv` (Instant Sandbox — Zero Setup)
 
-Run directly in a self-contained, isolated environment without polluting global Python:
+Run in an isolated environment without modifying global Python:
 
 ```bash
 uv run --with piiguardrails piiguardrails
@@ -49,88 +129,120 @@ uv run --with piiguardrails piiguardrails
 
 ---
 
-### 🖥️ First-Run Setup & UI Access
+### Method 3: Standalone Pre-Compiled Executable
 
-On first launch, `piiguardrails` automatically provisions the core engine and configures your encrypted local database.
+For restricted air-gapped environments without Python installed, download the standalone binary directly from [GitHub Releases](https://github.com/prajapativ/LLM_Guardrails/releases):
 
-1. A quick 30-second setup wizard prompts you in the terminal for your **Company Name** and **Admin Password**.
-2. Once initialized, the studio launches on:
-   👉 **`http://localhost:8000`**
-3. Log in with your admin credentials to access the live dashboard, manage API keys, customize PII detection rules, and monitor telemetry.
+- **Windows x64**: `EnterprisePIIGuardrail_v2.exe`
+  - *SHA-256*: `6b44699f3d344d51e6b75da03be919cbe586a29baf93ad604feb962c14bd8ba3`
+- **Linux x86_64**: `EnterprisePIIGuardrail_linux_x86_64`
+  - *SHA-256*: `11ddb6833339dce17841152573f12e90804903b67d1b837a2fc034ff996d0f1c`
+
+Run directly:
+```bash
+# Linux
+chmod +x EnterprisePIIGuardrail_linux_x86_64
+./EnterprisePIIGuardrail_linux_x86_64
+
+# Windows
+.\EnterprisePIIGuardrail_v2.exe
+```
 
 ---
 
-### 🎁 Community Launch Promo: 6 Months Free Enterprise
+### Method 4: Docker / Podman Deployment
 
-To celebrate our v2.0 release, early adopters can unlock full **Enterprise Tier** features (unlimited API requests, unrestricted payload length, and custom regex policies) through **March 31, 2027**:
+```bash
+docker run -d \
+  -p 8000:8000 \
+  -v $(pwd)/data:/app/data \
+  -e SQLCIPHER_PASSPHRASE="your-secure-passphrase-min-32-chars!" \
+  --name pii-guardrail-studio \
+  enterprise-pii-guardrail:v2.0.4
+```
+
+---
+
+## 🎁 Community Launch Promo: 6 Months Free Enterprise
+
+To celebrate the v2.0 release, community developers and enterprise teams can activate a full **Enterprise Tier** evaluation license (unlimited requests, unrestricted payload length, all 30+ entity recognizers, and custom regex builder) valid through **March 31, 2027**:
 
 ```text
 ED3-AMBGXK7UVD777777-GRYXEUYUZ432JOHY-UWVDBHXRLAXU4U47-7MBK2DQGIUV4JQT6-UJNRXNTHI3JPBGIS-P66HGKVYNLMQXHHS-M3N4RF3XDN6LZILT-WQNCGJ4KEY6ONIIM
 ```
 
-**To activate:**
-1. Open the studio dashboard (`http://localhost:8000`).
-2. Go to the **License** tab in the sidebar.
-3. Paste the key above and click **Activate License**.
+### How to Activate:
+1. Open your studio dashboard at `http://localhost:8000`.
+2. Click **Settings** in the left sidebar and open the **License & Quota** tab.
+3. Paste the product key into the activation field and click **Activate License**.
 
 ---
 
-## 🧩 Python Integration Example
+## 🧩 3-Line Python Integration
 
-Once the studio is running, integrate it directly into your LangChain, LlamaIndex, or raw API pipeline:
+Once the gateway is running, integrate it seamlessly into LangChain, LlamaIndex, or any Python LLM pipeline:
 
 ```python
 import requests
 
-API_KEY = "your-api-key-here"  # Generated in the Studio UI
-headers = {"X-API-Key": API_KEY, "Content-Type": "application/json"}
+API_URL = "http://localhost:8000"
+HEADERS = {"X-API-Key": "your-api-key-here", "Content-Type": "application/json"}
 
 # 1. Mask sensitive input before sending to LLM
-payload = {
-    "text": "Hello Alice Smith, your verification code was sent to alice.smith@acme.corp. Call us at 415-555-2671."
-}
+raw_prompt = "Patient Alice Walker (SSN: 987-65-4321, Phone: 555-019-2834) prescribed Amoxicillin."
+mask_res = requests.post(f"{API_URL}/mask", json={"text": raw_prompt}, headers=HEADERS).json()
 
-mask_response = requests.post("http://localhost:8000/mask", json=payload, headers=headers).json()
-print("Masked text for LLM:", mask_response["masked_text"])
-# Output: "Hello <PERSON_1>, your verification code was sent to <EMAIL_1>. Call us at <PHONE_1>."
+safe_prompt = mask_res["masked_text"]
+# Result: "Patient <PERSON_1> (SSN: <SSN_1>, Phone: <PHONE_1>) prescribed Amoxicillin."
 
-# 2. Query your LLM with safe, masked prompt...
-# simulated_llm_reply = "We contacted <PERSON_1> at <EMAIL_1> regarding the ticket."
+# 2. Query your LLM with the sanitized prompt
+# simulated_llm_reply = "Dosage for <PERSON_1> is 500mg daily. Contact <PHONE_1> for refill."
 
-# 3. Unmask the LLM response back to real entities for your user
-unmask_payload = {
-    "text": "We contacted <PERSON_1> at <EMAIL_1>.",
-    "mapping": mask_response["mapping"]
-}
-unmask_response = requests.post("http://localhost:8000/unmask", json=unmask_payload, headers=headers).json()
-print("Restored response:", unmask_response["unmasked_text"])
-# Output: "We contacted Alice Smith at alice.smith@acme.corp."
+# 3. Restore LLM output back to real patient data for authorized staff
+unmask_res = requests.post(f"{API_URL}/unmask", json={
+    "text": "Dosage for <PERSON_1> is 500mg daily. Contact <PHONE_1> for refill.",
+    "mapping": mask_res["mapping"]
+}, headers=HEADERS).json()
+
+print(unmask_res["unmasked_text"])
+# Output: "Dosage for Alice Walker is 500mg daily. Contact 555-019-2834 for refill."
 ```
 
 ---
 
-## 🛡️ Key Capabilities & Architecture
+## 🛡️ Enterprise Feature Matrix
 
-| Feature | Description |
-| :--- | :--- |
-| **Blazing Fast (<25ms)** | In-memory LRU authorization caching + asynchronous non-blocking SQLite/SQLCipher audit worker thread. |
-| **30+ Entity Recognizers** | SSN, Credit Cards, IBAN, Passports, Names, Emails, Phone Numbers, IP/MAC addresses, API keys, JWTs, Medical IDs. |
-| **AES-256 Storage** | Built-in SQLCipher encryption ensures all audit logs, API keys, and configurations are hardware-locked and encrypted at rest. |
-| **Zero-Footprint Cleanup** | Automatic boot-time and shutdown sweeps safely purge temporary runtime artifacts to prevent disk bloat across repeated runs. |
-| **Modern Management UI** | Material Design 3 / MUI dashboard for live telemetry, access keys, policy rules, and audit logs. |
-| **Deterministic Reverse Tokenizer** | Flawless restoration (`/unmask`) of LLM responses back to original values for authorized consumers. |
+| Capability | Community Promo / Trial | Standard Tier | Enterprise Tier |
+| :--- | :---: | :---: | :---: |
+| **Masking Latency** | **< 25ms** | **< 25ms** | **< 25ms** |
+| **Pre-built Entity Recognizers** | 30+ Included | 30+ Included | 30+ Included |
+| **Custom Regex Engine** | 2 Patterns | 5 Patterns | **Unlimited** |
+| **Max Payload Size** | 5,000 chars | 50,000 chars | **Unrestricted** |
+| **Monthly API Quota** | 1,000 reqs | 20,000 reqs | **Unlimited** |
+| **Storage Security** | SQLCipher AES-256 | SQLCipher AES-256 | **SQLCipher AES-256** |
+| **Licensing Mode** | Version 3 Floating | Version 3 Floating | **Version 4 Node-Locked (`--hwid`)** |
+| **Threat Intelligence Shield** | ✅ Included | ✅ Included | ✅ Included |
+| **Audit Logging & Retention** | ✅ Included | ✅ Included | ✅ Included |
+
+---
+
+## 📚 Complete Documentation Index
+
+- 📖 **[API Reference Specification](docs/API_REFERENCE.md)**: Full OpenAPI / REST documentation with request/response schemas for `/mask`, `/unmask`, `/health`, and Admin endpoints.
+- 🔑 **[Customer Licensing Guide](LICENSING_GUIDE.md)**: Guide on tiers, obtaining your Server Hardware ID, and activating enterprise keys offline.
+- 💾 **[Backup & Disaster Recovery Guide](docs/BACKUP_AND_DISASTER_RECOVERY.md)**: Database persistence, `.env` encryption passphrase management, and server migration.
 
 ---
 
 ## 📋 System Requirements
 
-- **Operating System**: Windows 10, Windows 11, Windows Server (64-bit) or Linux (Ubuntu, Debian, RHEL, CentOS, Fedora, Rocky, Arch, WSL2 x86_64)
-- **Python**: `>= 3.8` (or `uv`)
-- **Memory**: Minimum 2 GB RAM
-- **Port**: Default `8000` (configurable via `.env` or `--port`)
+- **Operating System**: Windows 10/11/Server (64-bit) or Linux (Ubuntu, Debian, RHEL, CentOS, Rocky, WSL2 x86_64)
+- **Python**: `>= 3.8` (if running via `pip` / `uv`)
+- **Memory**: Minimum 2 GB RAM (4 GB recommended for high throughput)
+- **Network Port**: Default `8000` (configurable via `--port` or `.env`)
 
 ---
 
 ## 📄 License
 
-This software is distributed under the [Enterprise Software License and Evaluation Agreement](LICENSE). All rights reserved.
+This software is governed by the [Enterprise Evaluation and Commercial License Agreement](LICENSE). All rights reserved.
