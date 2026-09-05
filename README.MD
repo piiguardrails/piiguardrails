@@ -1,19 +1,24 @@
 <div align="center">
 
-# 🛡️ Enterprise PII Guardrails Studio (v2.0.4)
+# 🛡️ Enterprise PII Guardrails Studio (v2.0.5)
 
 **High-Performance, Zero-Leak AI Privacy Gateway & Management Studio for Enterprise LLM Pipelines**
 
 [![PyPI Version](https://img.shields.io/pypi/v/piiguardrails?color=blue&label=PyPI%20Package)](https://pypi.org/project/piiguardrails/)
+[![PyPI Downloads](https://img.shields.io/pepy/dt/piiguardrails?color=blue&label=PyPI%20Downloads&logo=pypi&logoColor=white)](https://pypi.org/project/piiguardrails/)
+[![GitHub Downloads](https://img.shields.io/github/downloads/piiguardrails/piiguardrails/total?color=blue&label=GitHub%20Downloads&logo=github)](https://github.com/piiguardrails/piiguardrails/releases)
+[![Docker Pulls](https://img.shields.io/docker/pulls/piiguardrails/enterprise-pii-guardrail?color=blue&label=Docker%20Pulls&logo=docker&logoColor=white)](https://hub.docker.com/r/piiguardrails/enterprise-pii-guardrail)
+[![GitHub Stars](https://img.shields.io/github/stars/piiguardrails/piiguardrails?style=flat&logo=github&color=gold)](https://github.com/piiguardrails/piiguardrails)
+
 [![Python Version](https://img.shields.io/badge/python-%3E%3D%203.8-3776AB?logo=python&logoColor=white)](https://pypi.org/project/piiguardrails/)
-[![Security](https://img.shields.io/badge/Security-AES--256%20SQLCipher%20%7C%20Ed25519-blueviolet)](https://github.com/prajapativ/LLM_Guardrails)
-[![Performance](https://img.shields.io/badge/Latency-%3C25ms%20In--Memory-brightgreen)](https://github.com/prajapativ/LLM_Guardrails)
+[![Security](https://img.shields.io/badge/Security-AES--256%20SQLCipher%20%7C%20Ed25519-blueviolet)](https://github.com/piiguardrails/piiguardrails)
+[![Performance](https://img.shields.io/badge/Latency-%3C25ms%20In--Memory-brightgreen)](https://github.com/piiguardrails/piiguardrails)
 [![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20Linux%20x64-0078D4?logo=linux&logoColor=white)](https://pypi.org/project/piiguardrails/)
 [![License](https://img.shields.io/badge/License-Commercial%20%2F%20Evaluation-orange)](LICENSE)
 
 <br/>
 
-[**PyPI Package**](https://pypi.org/project/piiguardrails/) • [**API Reference**](docs/API_REFERENCE.md) • [**Licensing & Node-Locking**](LICENSING_GUIDE.md) • [**Disaster Recovery**](docs/BACKUP_AND_DISASTER_RECOVERY.md) • [**Report Issue**](https://github.com/prajapativ/LLM_Guardrails/issues)
+[**PyPI Package**](https://pypi.org/project/piiguardrails/) • [**API Reference**](docs/API_REFERENCE.md) • [**Licensing & Node-Locking**](LICENSING_GUIDE.md) • [**Disaster Recovery**](docs/BACKUP_AND_DISASTER_RECOVERY.md) • [**Report Issue**](https://github.com/piiguardrails/piiguardrails/issues)
 
 </div>
 
@@ -131,7 +136,7 @@ uv run --with piiguardrails piiguardrails
 
 ### Method 3: Standalone Pre-Compiled Executable
 
-For restricted air-gapped environments without Python installed, download the standalone binary directly from [GitHub Releases](https://github.com/prajapativ/LLM_Guardrails/releases):
+For restricted air-gapped environments without Python installed, download the standalone binary directly from [GitHub Releases](https://github.com/piiguardrails/piiguardrails/releases):
 
 - **Windows x64**: `EnterprisePIIGuardrail_v2.exe`
   - *SHA-256*: `6b44699f3d344d51e6b75da03be919cbe586a29baf93ad604feb962c14bd8ba3`
@@ -158,7 +163,7 @@ docker run -d \
   -v $(pwd)/data:/app/data \
   -e SQLCIPHER_PASSPHRASE="your-secure-passphrase-min-32-chars!" \
   --name pii-guardrail-studio \
-  enterprise-pii-guardrail:v2.0.4
+  piiguardrails/enterprise-pii-guardrail:latest
 ```
 
 ---
