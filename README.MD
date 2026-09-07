@@ -1,12 +1,12 @@
 <div align="center">
 
-# 🛡️ Enterprise PII Guardrails Studio (v2.0.5)
+# 🛡️ Enterprise PII Guardrails Studio (v2.0.6)
 
 **High-Performance, Zero-Leak AI Privacy Gateway & Management Studio for Enterprise LLM Pipelines**
 
 [![PyPI Version](https://img.shields.io/pypi/v/piiguardrails?color=blue&label=PyPI%20Package)](https://pypi.org/project/piiguardrails/)
 [![PyPI Downloads](https://img.shields.io/pepy/dt/piiguardrails?color=blue&label=PyPI%20Downloads&logo=pypi&logoColor=white)](https://pypi.org/project/piiguardrails/)
-[![GitHub Downloads](https://img.shields.io/github/downloads/piiguardrails/piiguardrails/total?color=blue&label=GitHub%20Downloads&logo=github)](https://github.com/piiguardrails/piiguardrails/releases)
+[![GitHub Downloads](https://img.shields.io/github/downloads/piiguardrails/piiguardrails/total?color=blue&label=GitHub%20Downloads&logo=github)](https://github.com/piiguardrails/piiguardrails)
 [![Docker Pulls](https://img.shields.io/docker/pulls/piiguardrails/enterprise-pii-guardrail?color=blue&label=Docker%20Pulls&logo=docker&logoColor=white)](https://hub.docker.com/r/piiguardrails/enterprise-pii-guardrail)
 [![GitHub Stars](https://img.shields.io/github/stars/piiguardrails/piiguardrails?style=flat&logo=github&color=gold)](https://github.com/piiguardrails/piiguardrails)
 
@@ -138,19 +138,19 @@ uv run --with piiguardrails piiguardrails
 
 For restricted air-gapped environments without Python installed, download the standalone binary directly from [GitHub Releases](https://github.com/piiguardrails/piiguardrails/releases):
 
-- **Windows x64**: `EnterprisePIIGuardrail_v2.exe`
-  - *SHA-256*: `6b44699f3d344d51e6b75da03be919cbe586a29baf93ad604feb962c14bd8ba3`
-- **Linux x86_64**: `EnterprisePIIGuardrail_linux_x86_64`
-  - *SHA-256*: `11ddb6833339dce17841152573f12e90804903b67d1b837a2fc034ff996d0f1c`
+- **Windows x64**: `EnterprisePIIGuardrail-v2.0.6-windows-x64.exe`
+  - *SHA-256*: `1f910b35635edb8ceebffe999513e77d037ca3a918724c1fb0ebc939da8a1e4e`
+- **Linux x86_64**: `EnterprisePIIGuardrail-v2.0.6-linux-x86_64`
+  - *SHA-256*: `50c7f948d724082ad007eab30c7f53b391ed8a5249237e8e1bc3d535eceadc4f`
 
 Run directly:
 ```bash
 # Linux
-chmod +x EnterprisePIIGuardrail_linux_x86_64
-./EnterprisePIIGuardrail_linux_x86_64
+chmod +x EnterprisePIIGuardrail-v2.0.6-linux-x86_64
+./EnterprisePIIGuardrail-v2.0.6-linux-x86_64
 
 # Windows
-.\EnterprisePIIGuardrail_v2.exe
+.\EnterprisePIIGuardrail-v2.0.6-windows-x64.exe
 ```
 
 ---
@@ -201,16 +201,16 @@ safe_prompt = mask_res["masked_text"]
 # Result: "Patient <PERSON_1> (SSN: <SSN_1>, Phone: <PHONE_1>) prescribed Amoxicillin."
 
 # 2. Query your LLM with the sanitized prompt
-# simulated_llm_reply = "Dosage for <PERSON_1> is 500mg daily. Contact <PHONE_1> for refill."
+# simulated_llm_reply = "Dosage for <PERSON_1> (SSN: <SSN_1>) is 500mg daily. Contact <PHONE_1> for refill."
 
 # 3. Restore LLM output back to real patient data for authorized staff
 unmask_res = requests.post(f"{API_URL}/unmask", json={
-    "text": "Dosage for <PERSON_1> is 500mg daily. Contact <PHONE_1> for refill.",
+    "text": "Dosage for <PERSON_1> (SSN: <SSN_1>) is 500mg daily. Contact <PHONE_1> for refill.",
     "mapping": mask_res["mapping"]
 }, headers=HEADERS).json()
 
 print(unmask_res["unmasked_text"])
-# Output: "Dosage for Alice Walker is 500mg daily. Contact 555-019-2834 for refill."
+# Output: "Dosage for Alice Walker (SSN: 987-65-4321) is 500mg daily. Contact 555-019-2834 for refill."
 ```
 
 ---
