@@ -4,7 +4,7 @@
 
 **High-Performance, Zero-Leak AI Privacy Gateway & Management Studio for Enterprise LLM Pipelines**
 
-[![PyPI Version](https://img.shields.io/pypi/v/piiguardrails?color=blue&label=PyPI%20Package)](https://pypi.org/project/piiguardrails/)
+[![PyPI Version](https://img.shields.io/badge/PyPI%20Package-v2.0.6-blue?logo=pypi&logoColor=white)](https://pypi.org/project/piiguardrails/)
 [![PyPI Downloads](https://img.shields.io/pepy/dt/piiguardrails?color=blue&label=PyPI%20Downloads&logo=pypi&logoColor=white)](https://pypi.org/project/piiguardrails/)
 [![GitHub Downloads](https://img.shields.io/github/downloads/piiguardrails/piiguardrails/total?color=blue&label=GitHub%20Downloads&logo=github)](https://github.com/piiguardrails/piiguardrails)
 [![Docker Pulls](https://img.shields.io/docker/pulls/piiguardrails/enterprise-pii-guardrail?color=blue&label=Docker%20Pulls&logo=docker&logoColor=white)](https://hub.docker.com/r/piiguardrails/enterprise-pii-guardrail)
