@@ -157,7 +157,7 @@ For restricted air-gapped environments without Python installed, download the st
 - **Windows x64**: `EnterprisePIIGuardrail-v2.0.7-windows-x64.exe`
   - *SHA-256*: `64dfa6af6893a24b33dd8bbca263b494c1f2a953462a4ac8134ac4a2b22a806c`
 - **Linux x86_64**: `EnterprisePIIGuardrail-v2.0.7-linux-x86_64`
-  - *SHA-256*: `556b18841a9b60337c21e68d2a9f3ed9b01db75a2ea74e93c7bcef1af63ee075`
+  - *SHA-256*: `1f501e9caea0a590704ae8793e16bb9129f35e8280d8e2880f46165a5172ddf7`
 
 Run directly:
 ```bash
