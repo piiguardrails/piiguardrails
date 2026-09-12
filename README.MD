@@ -1,10 +1,10 @@
 <div align="center">
 
-# 🛡️ Enterprise PII Guardrails Studio (v2.0.6)
+# 🛡️ Enterprise PII Guardrails Studio (v2.0.7)
 
 **High-Performance, Zero-Leak AI Privacy Gateway & Management Studio for Enterprise LLM Pipelines**
 
-[![PyPI Version](https://img.shields.io/badge/PyPI%20Package-v2.0.6-blue?logo=pypi&logoColor=white)](https://pypi.org/project/piiguardrails/)
+[![PyPI Version](https://img.shields.io/badge/PyPI%20Package-v2.0.7-blue?logo=pypi&logoColor=white)](https://pypi.org/project/piiguardrails/)
 [![PyPI Downloads](https://img.shields.io/pepy/dt/piiguardrails?color=blue&label=PyPI%20Downloads&logo=pypi&logoColor=white)](https://pypi.org/project/piiguardrails/)
 [![GitHub Downloads](https://img.shields.io/github/downloads/piiguardrails/piiguardrails/total?color=blue&label=GitHub%20Downloads&logo=github)](https://github.com/piiguardrails/piiguardrails)
 [![Docker Pulls](https://img.shields.io/docker/pulls/piiguardrails/enterprise-pii-guardrail?color=blue&label=Docker%20Pulls&logo=docker&logoColor=white)](https://hub.docker.com/r/piiguardrails/enterprise-pii-guardrail)
@@ -48,8 +48,8 @@ Cryptographically bound to your server hardware using Ed25519 signatures with ze
 
 ![License Management](docs/assets/license_management.png)
 
-#### 3. 30+ Entity Recognizers & Rule Engine
-Granular toggles for Financial, Healthcare, IT Security, and Core PII with configurable replacement strategies (Replace, Mask, Hash, Redact).
+#### 3. 30+ Entity Recognizers & Compliance Profiles (HIPAA, GDPR, India DPDP)
+Granular toggles for Financial, Healthcare, IT Security, Core PII, and statutory regional compliance—including the turnkey **India DPDP Act (2023)** profile with UIDAI Masked Aadhaar (`XXXX-XXXX-1234`), PAN Card, ABHA Health ID, UPI VPA, and IFSC Code.
 
 ![Guardrail Profiles](docs/assets/guardrail_profiles.png)
 
@@ -73,6 +73,7 @@ Encrypted session management, role-based access control, and customizable enterp
 
 ### Why Enterprise Engineering Teams Choose This Gateway:
 - **Sub-25ms Live Masking**: In-memory LRU authorization cache and non-blocking asynchronous audit pipeline.
+- **Turnkey Statutory Regulatory Profiles**: 1-click baseline protection for **HIPAA**, **GDPR**, **PCI-DSS v4.0**, and **India DPDP Act (2023)** (with UIDAI Aadhaar, PAN, ABHA, UPI, and IFSC support).
 - **Zero-Leak Guarantee at Rest**: Database, API keys, and audit logs are encrypted using **SQLCipher AES-256-CBC**.
 - **SHA-256 Cryptographic Verification**: Every downloaded runtime engine is verified on the fly against official SHA-256 hashes prior to execution.
 - **Node-Locked Licensing (v4)**: Commercial licenses are cryptographically locked to the host's **Server Hardware ID** via Ed25519 asymmetric signatures—operating 100% offline with zero cloud dependency.
@@ -138,19 +139,19 @@ uv run --with piiguardrails piiguardrails
 
 For restricted air-gapped environments without Python installed, download the standalone binary directly from [GitHub Releases](https://github.com/piiguardrails/piiguardrails/releases):
 
-- **Windows x64**: `EnterprisePIIGuardrail-v2.0.6-windows-x64.exe`
-  - *SHA-256*: `1f910b35635edb8ceebffe999513e77d037ca3a918724c1fb0ebc939da8a1e4e`
-- **Linux x86_64**: `EnterprisePIIGuardrail-v2.0.6-linux-x86_64`
-  - *SHA-256*: `50c7f948d724082ad007eab30c7f53b391ed8a5249237e8e1bc3d535eceadc4f`
+- **Windows x64**: `EnterprisePIIGuardrail-v2.0.7-windows-x64.exe`
+  - *SHA-256*: `64dfa6af6893a24b33dd8bbca263b494c1f2a953462a4ac8134ac4a2b22a806c`
+- **Linux x86_64**: `EnterprisePIIGuardrail-v2.0.7-linux-x86_64`
+  - *SHA-256*: `556b18841a9b60337c21e68d2a9f3ed9b01db75a2ea74e93c7bcef1af63ee075`
 
 Run directly:
 ```bash
 # Linux
-chmod +x EnterprisePIIGuardrail-v2.0.6-linux-x86_64
-./EnterprisePIIGuardrail-v2.0.6-linux-x86_64
+chmod +x EnterprisePIIGuardrail-v2.0.7-linux-x86_64
+./EnterprisePIIGuardrail-v2.0.7-linux-x86_64
 
 # Windows
-.\EnterprisePIIGuardrail-v2.0.6-windows-x64.exe
+.\EnterprisePIIGuardrail-v2.0.7-windows-x64.exe
 ```
 
 ---
