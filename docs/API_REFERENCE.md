@@ -1,4 +1,4 @@
-# Enterprise PII Guardrails - REST API Reference Specification (v2.0.6)
+# Enterprise PII Guardrails - REST API Reference Specification (v2.0.7)
 
 The **Enterprise PII Guardrail Studio** exposes an ultra-low-latency RESTful API designed for seamless integration into high-throughput LLM pipelines, microservices, and workflow orchestrators (e.g. LangChain, LlamaIndex, n8n, Airflow).
 
