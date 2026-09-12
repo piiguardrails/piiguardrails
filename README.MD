@@ -34,32 +34,47 @@ Inspect, scrub, and redact sensitive entities with sub-25ms latency. Visual badg
 <br/>
 
 <details>
-<summary><b>🔍 Expand to View Additional Studio Screenshots</b></summary>
+<summary><b>🔍 Expand to View Additional Studio Screenshots (8 Views)</b></summary>
 
 <br/>
 
 #### 1. Deterministic Safe Payload Output (`/mask`)
-Transformed prompt ready for LLM consumption with reversible placeholder tokens (`<PERSON_1>`, `<SSN_1>`, `<CREDIT_CARD_1>`).
+Transformed prompt ready for LLM consumption with reversible placeholder tokens (`<PERSON_1>`, `<SSN_1>`, `<CREDIT_CARD_1>`) and UIDAI statutory masked Aadhaar (`XXXX-XXXX-1234`).
 
 ![Safe Payload View](docs/assets/safe_payload_view.png)
 
-#### 2. Node-Locked Enterprise Licensing & Hardware ID Management
-Cryptographically bound to your server hardware using Ed25519 signatures with zero external network phone-home requirement.
-
-![License Management](docs/assets/license_management.png)
-
-#### 3. 30+ Entity Recognizers & Compliance Profiles (HIPAA, GDPR, India DPDP)
+#### 2. 30+ Entity Recognizers & Compliance Profiles (HIPAA, GDPR, India DPDP)
 Granular toggles for Financial, Healthcare, IT Security, Core PII, and statutory regional compliance—including the turnkey **India DPDP Act (2023)** profile with UIDAI Masked Aadhaar (`XXXX-XXXX-1234`), PAN Card, ABHA Health ID, UPI VPA, and IFSC Code.
 
 ![Guardrail Profiles](docs/assets/guardrail_profiles.png)
 
-#### 4. Real-Time Threat Intelligence & IoC Shield
+#### 3. External Logging & SIEM Integrations Hub (Splunk, Datadog, Webhooks)
+Enterprise log stream forwarders with automated Splunk Event wrapping, Datadog Intake API integration, and real-time radiating status beacons.
+
+![SIEM Integrations](docs/assets/siem_integrations.png)
+
+#### 4. Enterprise Security Audit Logs & Telemetry
+Immutable audit trails recording all masking events, policy intercepts, and administrative actions with full-text search, filtering, and CSV/JSON export.
+
+![Audit Logs](docs/assets/audit_logs.png)
+
+#### 5. Dynamic Custom Entity Pool (SQLite-Backed)
+Define, search, and manage custom organization-specific regex patterns and entity definitions persisted directly in the local encrypted database.
+
+![Custom Entity Pool](docs/assets/custom_entity_pool.png)
+
+#### 6. Real-Time Threat Intelligence & IoC Shield
 Interception firewall blocking malicious IP addresses, phishing domains, and credential leaks before evaluation.
 
 ![Threat Intelligence](docs/assets/threat_intelligence.png)
 
-#### 5. Enterprise Authentication Portal
-Encrypted session management, role-based access control, and customizable enterprise branding.
+#### 7. Node-Locked Enterprise Licensing & Hardware ID Management
+Cryptographically bound to your server hardware using Ed25519 signatures with zero external network phone-home requirement.
+
+![License Management](docs/assets/license_management.png)
+
+#### 8. Enterprise Authentication Portal
+Encrypted session management, role-based access control, secret visibility eye-toggles, and customizable enterprise branding.
 
 ![Login Screen](docs/assets/login_screen.png)
 
