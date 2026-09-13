@@ -155,9 +155,9 @@ uv run --with piiguardrails piiguardrails
 For restricted air-gapped environments without Python installed, download the standalone binary directly from [GitHub Releases](https://github.com/piiguardrails/piiguardrails/releases):
 
 - **Windows x64**: `EnterprisePIIGuardrail-v2.0.8-windows-x64.exe`
-  - *SHA-256*: `64dfa6af6893a24b33dd8bbca263b494c1f2a953462a4ac8134ac4a2b22a806c`
+  - *SHA-256*: `57d722505048d97fb1b3069058d089f26a6833be066f438b150e16e307d27b59`
 - **Linux x86_64**: `EnterprisePIIGuardrail-v2.0.8-linux-x86_64`
-  - *SHA-256*: `db7344365e05594b6b88db175d35a978dfe0c43ae82f0085517eca19a4d989dd`
+  - *SHA-256*: `525d9217d2f6888df980341898ae06d8e576f4e76499ffe793da09d0c3618cbf`
 
 Run directly:
 ```bash
