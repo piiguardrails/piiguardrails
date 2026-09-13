@@ -1,10 +1,10 @@
 <div align="center">
 
-# 🛡️ Enterprise PII Guardrails Studio (v2.0.7)
+# 🛡️ Enterprise PII Guardrails Studio
 
 **High-Performance, Zero-Leak AI Privacy Gateway & Management Studio for Enterprise LLM Pipelines**
 
-[![PyPI Version](https://img.shields.io/badge/PyPI%20Package-v2.0.7-blue?logo=pypi&logoColor=white)](https://pypi.org/project/piiguardrails/)
+[![PyPI Version](https://img.shields.io/badge/PyPI%20Package-v2.0.8-blue?logo=pypi&logoColor=white)](https://pypi.org/project/piiguardrails/)
 [![PyPI Downloads](https://img.shields.io/pepy/dt/piiguardrails?color=blue&label=PyPI%20Downloads&logo=pypi&logoColor=white)](https://pypi.org/project/piiguardrails/)
 [![GitHub Downloads](https://img.shields.io/github/downloads/piiguardrails/piiguardrails/total?color=blue&label=GitHub%20Downloads&logo=github)](https://github.com/piiguardrails/piiguardrails)
 [![Docker Pulls](https://img.shields.io/docker/pulls/piiguardrails/enterprise-pii-guardrail?color=blue&label=Docker%20Pulls&logo=docker&logoColor=white)](https://hub.docker.com/r/piiguardrails/enterprise-pii-guardrail)
@@ -18,7 +18,7 @@
 
 <br/>
 
-[**PyPI Package**](https://pypi.org/project/piiguardrails/) • [**API Reference**](docs/API_REFERENCE.md) • [**Licensing & Node-Locking**](LICENSING_GUIDE.md) • [**Disaster Recovery**](docs/BACKUP_AND_DISASTER_RECOVERY.md) • [**Report Issue**](https://github.com/piiguardrails/piiguardrails/issues)
+[**PyPI Package**](https://pypi.org/project/piiguardrails/) • [**API Reference**](docs/API_REFERENCE.md) • [**Commercial License**](https://piiguardrails.com/license) • [**Licensing & Node-Locking**](LICENSING_GUIDE.md) • [**Disaster Recovery**](docs/BACKUP_AND_DISASTER_RECOVERY.md) • [**Report Issue**](https://github.com/piiguardrails/piiguardrails/issues)
 
 </div>
 
@@ -43,7 +43,7 @@ Transformed prompt ready for LLM consumption with reversible placeholder tokens 
 
 ![Safe Payload View](docs/assets/safe_payload_view.png)
 
-#### 2. 30+ Entity Recognizers & Compliance Profiles (HIPAA, GDPR, India DPDP)
+#### 2. 30+ Entity Recognizers & Regulatory Profiles (HIPAA, GDPR, India DPDP, PCI-DSS)
 Granular toggles for Financial, Healthcare, IT Security, Core PII, and statutory regional compliance—including the turnkey **India DPDP Act (2023)** profile with UIDAI Masked Aadhaar (`XXXX-XXXX-1234`), PAN Card, ABHA Health ID, UPI VPA, and IFSC Code.
 
 ![Guardrail Profiles](docs/assets/guardrail_profiles.png)
@@ -88,8 +88,8 @@ Encrypted session management, role-based access control, secret visibility eye-t
 
 ### Why Enterprise Engineering Teams Choose This Gateway:
 - **Sub-25ms Live Masking**: In-memory LRU authorization cache and non-blocking asynchronous audit pipeline.
-- **Turnkey Statutory Regulatory Profiles**: 1-click baseline protection for **HIPAA**, **GDPR**, **PCI-DSS v4.0**, and **India DPDP Act (2023)** (with UIDAI Aadhaar, PAN, ABHA, UPI, and IFSC support).
-- **Zero-Leak Guarantee at Rest**: Database, API keys, and audit logs are encrypted using **SQLCipher AES-256-CBC**.
+- **Turnkey Statutory Regulatory Profiles**: 1-click baseline protection for **HIPAA Security Rule Safeguards (45 CFR § 164.312)**, **GDPR Article 32 Technical Measures**, **PCI-DSS v4.0 Req 3.4 Shield**, and **India DPDP Act (2023)** (with UIDAI Aadhaar, PAN, ABHA, UPI, and IFSC support).
+- **Zero-Leak Guarantee at Rest**: Database, API keys, and audit logs are encrypted using **SQLCipher 256-bit AES-CBC** (with per-page HMAC-SHA512 integrity verification). Exported configurations and vault token dumps utilize Authenticated **AES-256-GCM**.
 - **SHA-256 Cryptographic Verification**: Every downloaded runtime engine is verified on the fly against official SHA-256 hashes prior to execution.
 - **Node-Locked Licensing (v4)**: Commercial licenses are cryptographically locked to the host's **Server Hardware ID** via Ed25519 asymmetric signatures—operating 100% offline with zero cloud dependency.
 - **Bi-Directional Token Restoration**: Effortlessly restore LLM responses (`/unmask`) back to original values for authorized end users.
@@ -154,19 +154,19 @@ uv run --with piiguardrails piiguardrails
 
 For restricted air-gapped environments without Python installed, download the standalone binary directly from [GitHub Releases](https://github.com/piiguardrails/piiguardrails/releases):
 
-- **Windows x64**: `EnterprisePIIGuardrail-v2.0.7-windows-x64.exe`
+- **Windows x64**: `EnterprisePIIGuardrail-v2.0.8-windows-x64.exe`
   - *SHA-256*: `64dfa6af6893a24b33dd8bbca263b494c1f2a953462a4ac8134ac4a2b22a806c`
-- **Linux x86_64**: `EnterprisePIIGuardrail-v2.0.7-linux-x86_64`
+- **Linux x86_64**: `EnterprisePIIGuardrail-v2.0.8-linux-x86_64`
   - *SHA-256*: `1f501e9caea0a590704ae8793e16bb9129f35e8280d8e2880f46165a5172ddf7`
 
 Run directly:
 ```bash
 # Linux
-chmod +x EnterprisePIIGuardrail-v2.0.7-linux-x86_64
-./EnterprisePIIGuardrail-v2.0.7-linux-x86_64
+chmod +x EnterprisePIIGuardrail-v2.0.8-linux-x86_64
+./EnterprisePIIGuardrail-v2.0.8-linux-x86_64
 
 # Windows
-.\EnterprisePIIGuardrail-v2.0.7-windows-x64.exe
+.\EnterprisePIIGuardrail-v2.0.8-windows-x64.exe
 ```
 
 ---
@@ -177,7 +177,9 @@ chmod +x EnterprisePIIGuardrail-v2.0.7-linux-x86_64
 docker run -d \
   -p 8000:8000 \
   -v $(pwd)/data:/app/data \
+  -e ACCEPT_LICENSE=true \
   -e SQLCIPHER_PASSPHRASE="your-secure-passphrase-min-32-chars!" \
+  -e GUI_PASSWORD="<your-secure-password>" \
   --name pii-guardrail-studio \
   piiguardrails/enterprise-pii-guardrail:latest
 ```
@@ -240,7 +242,7 @@ print(unmask_res["unmasked_text"])
 | **Custom Regex Engine** | 2 Patterns | 5 Patterns | **Unlimited** |
 | **Max Payload Size** | 5,000 chars | 50,000 chars | **Unrestricted** |
 | **Monthly API Quota** | 1,000 reqs | 20,000 reqs | **Unlimited** |
-| **Storage Security** | SQLCipher AES-256 | SQLCipher AES-256 | **SQLCipher AES-256** |
+| **Storage Security** | SQLCipher AES-256-CBC | SQLCipher AES-256-CBC | **SQLCipher AES-256-CBC** |
 | **Licensing Mode** | Version 3 Floating | Version 3 Floating | **Version 4 Node-Locked (`--hwid`)** |
 | **Threat Intelligence Shield** | ✅ Included | ✅ Included | ✅ Included |
 | **Audit Logging & Retention** | ✅ Included | ✅ Included | ✅ Included |
@@ -250,6 +252,10 @@ print(unmask_res["unmasked_text"])
 ## 📚 Complete Documentation Index
 
 - 📖 **[API Reference Specification](docs/API_REFERENCE.md)**: Full OpenAPI / REST documentation with request/response schemas for `/mask`, `/unmask`, `/health`, and Admin endpoints.
+- 📊 **[Performance Benchmarks](docs/BENCHMARKS.md)**: Latency breakdown (<25ms target, 3.8ms P50), concurrency tests, and test machine methodology.
+- 🗂️ **[Entity Catalog](docs/ENTITY_CATALOG.md)**: Exhaustive reference of 30+ built-in recognizers, context patterns, and mathematical checksum validations.
+- 🛡️ **[Security Policy](SECURITY.md)**: Vulnerability disclosure SLAs, security practices, and incident reporting.
+- 🏰 **[Threat Model & Trust Boundaries](docs/THREAT_MODEL.md)**: STRIDE analysis, network ingress/egress profile, and local attack surface.
 - 🔑 **[Customer Licensing Guide](LICENSING_GUIDE.md)**: Guide on tiers, obtaining your Server Hardware ID, and activating enterprise keys offline.
 - 💾 **[Backup & Disaster Recovery Guide](docs/BACKUP_AND_DISASTER_RECOVERY.md)**: Database persistence, `.env` encryption passphrase management, and server migration.
 
@@ -266,4 +272,10 @@ print(unmask_res["unmasked_text"])
 
 ## 📄 License
 
-This software is governed by the [Enterprise Evaluation and Commercial License Agreement](LICENSE). All rights reserved.
+This software is governed by the [Enterprise Evaluation and Commercial License Agreement](https://piiguardrails.com/license) ([Local Copy](LICENSE)). All rights reserved.
+
+---
+
+## ⚖️ Statutory & Compliance Disclaimer
+
+Enterprise PII Guardrail provides technical safeguards to assist organizations in meeting regulatory obligations (such as HIPAA Security Rule § 164.312, PCI-DSS v4.0 Req 3.4, and GDPR Art. 32). Software alone does not constitute legal certification or regulatory compliance. Organizations remain responsible for their overall compliance postures and governance policies.
