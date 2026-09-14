@@ -1,0 +1,130 @@
+{
+  "name": "PII-Safe LLM Pipeline (Enterprise Guardrails)",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "1",
+      "name": "Start / Manual Trigger",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [240, 300]
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "customer_prompt",
+              "value": "Hello support, my name is Alice Smith (alice.smith@healthcare.corp, phone 415-555-2671). Please check my claim record MRN-998234 and credit card 4111-2222-3333-4444."
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "2",
+      "name": "Sample Customer Prompt",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [460, 300]
+    },
+    {
+      "parameters": {
+        "operation": "mask",
+        "text": "={{ $json.customer_prompt }}"
+      },
+      "id": "3",
+      "name": "PII Guardrails: Mask",
+      "type": "n8n-nodes-piiguardrails.piiGuardrails",
+      "typeVersion": 1,
+      "position": [680, 300],
+      "credentials": {
+        "piiGuardrailsApi": {
+          "id": "1",
+          "name": "Enterprise PII Guardrails API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "llm_raw_response",
+              "value": "=Thank you for reaching out, {{ $json.masked_text.includes('[HUMAN_NAME_1]') ? '[HUMAN_NAME_1]' : 'valued customer' }}. We have verified your request regarding [MEDICAL_RECORD_NUMBER_1] and your card [CREDIT_CARD_1]. A confirmation has been dispatched to [EMAIL_ADDRESS_1]."
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "4",
+      "name": "LLM Processing (Simulated OpenAI)",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [900, 300]
+    },
+    {
+      "parameters": {
+        "operation": "unmask",
+        "unmaskText": "={{ $json.llm_raw_response }}",
+        "mapping": "={{ $('PII Guardrails: Mask').item.json.mapping }}"
+      },
+      "id": "5",
+      "name": "PII Guardrails: Unmask",
+      "type": "n8n-nodes-piiguardrails.piiGuardrails",
+      "typeVersion": 1,
+      "position": [1120, 300],
+      "credentials": {
+        "piiGuardrailsApi": {
+          "id": "1",
+          "name": "Enterprise PII Guardrails API"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Start / Manual Trigger": {
+      "main": [
+        [
+          {
+            "node": "Sample Customer Prompt",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Sample Customer Prompt": {
+      "main": [
+        [
+          {
+            "node": "PII Guardrails: Mask",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "PII Guardrails: Mask": {
+      "main": [
+        [
+          {
+            "node": "LLM Processing (Simulated OpenAI)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "LLM Processing (Simulated OpenAI)": {
+      "main": [
+        [
+          {
+            "node": "PII Guardrails: Unmask",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  }
+}
