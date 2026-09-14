@@ -20,9 +20,9 @@ Only the current and immediately preceding minor release branches receive offici
 
 If you discover a security vulnerability, flaw, or potential zero-egress bypass within Enterprise PII Guardrails, **DO NOT** create a public GitHub issue.
 
-Please submit your report through one of the following private channels:
-* **GitHub Private Security Advisory**: [Open Security Advisory](https://github.com/piiguardrails/piiguardrails/security/advisories/new)
-* **Encrypted Security Email**: `security@piiguardrails.com`
+Please submit your report through one of the following channels:
+* **Direct Security & Incident Response**: [`piiguardrails@gmail.com`](mailto:piiguardrails@gmail.com)
+* **GitHub Security Advisory Portal**: [Security Advisories](https://github.com/piiguardrails/piiguardrails/security/advisories)
 
 ### Report Requirements
 To help our security engineering team triage and verify your finding promptly, please include:
