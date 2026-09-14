@@ -2,7 +2,7 @@
 
 <p align="center">
   <a href="https://www.npmjs.com/package/n8n-nodes-piiguardrails"><img src="https://img.shields.io/npm/v/n8n-nodes-piiguardrails?color=00c853&style=for-the-badge&logo=npm" alt="npm version" /></a>
-  <a href="https://www.npmjs.com/package/n8n-nodes-piiguardrails"><img src="https://img.shields.io/npm/dm/n8n-nodes-piiguardrails?color=2196f3&style=for-the-badge" alt="npm downloads" /></a>
+  <a href="https://nodejs.org"><img src="https://img.shields.io/badge/Node.js-%3E%3D%2018.0.0-339933?style=for-the-badge&logo=node.js" alt="Node.js version" /></a>
   <a href="https://n8n.io"><img src="https://img.shields.io/badge/n8n-community--node-EA4B71.svg?style=for-the-badge&logo=n8n" alt="n8n community node" /></a>
   <a href="LICENSE.md"><img src="https://img.shields.io/badge/License-Proprietary-7c4dff.svg?style=for-the-badge" alt="License" /></a>
   <a href="https://piiguardrails.com"><img src="https://img.shields.io/badge/Zero--Data--Retention-Guaranteed-00e676?style=for-the-badge&logo=shield" alt="Zero Data Retention" /></a>
