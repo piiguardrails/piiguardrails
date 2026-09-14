@@ -88,7 +88,7 @@ Encrypted session management, role-based access control, secret visibility eye-t
 
 ### Why Enterprise Engineering Teams Choose This Gateway:
 - **Sub-25ms Live Masking**: In-memory LRU authorization cache and non-blocking asynchronous audit pipeline.
-- **Turnkey Statutory Regulatory Profiles**: 1-click baseline protection for **HIPAA Security Rule Safeguards (45 CFR § 164.312)**, **GDPR Article 32 Technical Measures**, **PCI-DSS v4.0 Req 3.4 Shield**, and **India DPDP Act (2023)** (with UIDAI Aadhaar, PAN, ABHA, UPI, and IFSC support).
+- **Turnkey Statutory Regulatory Profiles**: 1-click baseline protection for **HIPAA Security Rule Safeguards (45 CFR 164.312)**, **GDPR Article 32 Technical Measures**, **PCI-DSS v4.0 Req 3.4 Shield**, and **India DPDP Act (2023)** (with UIDAI Aadhaar, PAN, ABHA, UPI, and IFSC support).
 - **Zero-Leak Guarantee at Rest**: Database, API keys, and audit logs are encrypted using **SQLCipher 256-bit AES-CBC** (with per-page HMAC-SHA512 integrity verification). Exported configurations and vault token dumps utilize Authenticated **AES-256-GCM**.
 - **SHA-256 Cryptographic Verification**: Every downloaded runtime engine is verified on the fly against official SHA-256 hashes prior to execution.
 - **Node-Locked Licensing (v4)**: Commercial licenses are cryptographically locked to the host's **Server Hardware ID** via Ed25519 asymmetric signatures—operating 100% offline with zero cloud dependency.
@@ -155,7 +155,7 @@ uv run --with piiguardrails piiguardrails
 For restricted air-gapped environments without Python installed, download the standalone binary directly from [GitHub Releases](https://github.com/piiguardrails/piiguardrails/releases):
 
 - **Windows x64**: `EnterprisePIIGuardrail-v2.0.8-windows-x64.exe`
-  - *SHA-256*: `57d722505048d97fb1b3069058d089f26a6833be066f438b150e16e307d27b59`
+  - *SHA-256*: `43f26500fe8aed2ca78bef958639aea7317ec322ac1927fd4775fc9feea3ec37`
 - **Linux x86_64**: `EnterprisePIIGuardrail-v2.0.8-linux-x86_64`
   - *SHA-256*: `8c2c62885ecaecce1bcb458ab86aa824eee1946cfe887100dbcd01b15ffdd77a`
 
@@ -235,17 +235,19 @@ print(unmask_res["unmasked_text"])
 
 ## 🛡️ Enterprise Feature Matrix
 
-| Capability | Community Promo / Trial | Standard Tier | Enterprise Tier |
+| Capability | Trial Tier | Standard Tier | Enterprise Tier |
 | :--- | :---: | :---: | :---: |
 | **Masking Latency** | **< 25ms** | **< 25ms** | **< 25ms** |
 | **Pre-built Entity Recognizers** | 30+ Included | 30+ Included | 30+ Included |
 | **Custom Regex Engine** | 2 Patterns | 5 Patterns | **Unlimited** |
 | **Max Payload Size** | 5,000 chars | 50,000 chars | **Unrestricted** |
-| **Monthly API Quota** | 1,000 reqs | 20,000 reqs | **Unlimited** |
+| **API Request Quota** | 1,000 reqs/mo | 20,000 reqs/mo | **Unlimited** |
 | **Storage Security** | SQLCipher AES-256-CBC | SQLCipher AES-256-CBC | **SQLCipher AES-256-CBC** |
-| **Licensing Mode** | Version 3 Floating | Version 3 Floating | **Version 4 Node-Locked (`--hwid`)** |
+| **Licensing Mode** | Version 3 Floating | Version 3 Floating | **Version 4 Node-Locked (HWID)** |
 | **Threat Intelligence Shield** | ✅ Included | ✅ Included | ✅ Included |
 | **Audit Logging & Retention** | ✅ Included | ✅ Included | ✅ Included |
+
+> 🎁 **Community Launch Promo**: To celebrate our launch, early adopters can use the promotional product key above to activate the full **Enterprise Tier** (unlimited quota, unrestricted payload length, and unlimited custom regex patterns) free of charge through **March 31, 2027**.
 
 ---
 
@@ -278,4 +280,4 @@ This software is governed by the [Enterprise Evaluation and Commercial License A
 
 ## ⚖️ Statutory & Compliance Disclaimer
 
-Enterprise PII Guardrail provides technical safeguards to assist organizations in meeting regulatory obligations (such as HIPAA Security Rule § 164.312, PCI-DSS v4.0 Req 3.4, and GDPR Art. 32). Software alone does not constitute legal certification or regulatory compliance. Organizations remain responsible for their overall compliance postures and governance policies.
+Enterprise PII Guardrail provides technical safeguards to assist organizations in meeting regulatory obligations (such as India DPDP Act 2023, HIPAA Security Rule 45 CFR 164.312, PCI-DSS v4.0 Req 3.4, and GDPR Art. 32). Software alone does not constitute legal certification or regulatory compliance. Organizations remain responsible for their overall compliance postures and governance policies.
