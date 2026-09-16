@@ -1,0 +1,18 @@
+{
+	"node": "n8n-nodes-piiguardrails",
+	"nodeVersion": "1.0",
+	"codexVersion": "1.0",
+	"categories": ["Development", "Utility", "Data & Storage"],
+	"resources": {
+		"credentialDocumentation": [
+			{
+				"url": "https://www.npmjs.com/package/n8n-nodes-piiguardrails#readme"
+			}
+		],
+		"primaryDocumentation": [
+			{
+				"url": "https://www.npmjs.com/package/n8n-nodes-piiguardrails#readme"
+			}
+		]
+	}
+}
