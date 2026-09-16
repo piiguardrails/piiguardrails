@@ -1,0 +1,37 @@
+name: Publish n8n Community Node to npm (with Provenance)
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - 'n8n-v*'
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write # Mandatory for npm provenance attestation via Sigstore
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Install dependencies
+        run: npm ci
+        working-directory: integrations/n8n-nodes-piiguardrails
+
+      - name: Build node package
+        run: npm run build
+        working-directory: integrations/n8n-nodes-piiguardrails
+
+      - name: Publish to npm with provenance
+        run: npm publish --provenance --access public
+        working-directory: integrations/n8n-nodes-piiguardrails
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
