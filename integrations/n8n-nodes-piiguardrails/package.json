@@ -1,0 +1,56 @@
+{
+  "name": "n8n-nodes-piiguardrails",
+  "version": "0.1.4",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/piiguardrails/piiguardrails.git"
+  },
+  "description": "Enterprise PII Guardrails connector for n8n: Enterprise-grade PII masking, restoration, and compliance guardrails for AI/LLM workflows",
+  "keywords": [
+    "n8n-community-node-package",
+    "pii",
+    "guardrails",
+    "gdpr",
+    "hipaa",
+    "pci-dss",
+    "privacy",
+    "llm",
+    "ai-safety"
+  ],
+  "license": "MIT",
+  "homepage": "https://piiguardrails.com",
+  "author": {
+    "name": "piiguardrails.com",
+    "email": "piiguardrails@gmail.com"
+  },
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc && gulp build:icons",
+    "dev": "tsc --watch",
+    "format": "prettier --write \"**/*.ts\""
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE.md",
+    "workflows"
+  ],
+  "n8n": {
+    "n8nNodesApiVersion": 1,
+    "credentials": [
+      "dist/credentials/PiiGuardrailsApi.credentials.js"
+    ],
+    "nodes": [
+      "dist/nodes/PiiGuardrails/PiiGuardrails.node.js"
+    ]
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "gulp": "^5.0.0",
+    "n8n-workflow": "^1.82.0",
+    "typescript": "^5.4.0"
+  },
+  "peerDependencies": {
+    "n8n-workflow": ">=1.0.0"
+  }
+}
