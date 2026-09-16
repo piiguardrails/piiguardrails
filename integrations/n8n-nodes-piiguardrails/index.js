@@ -1,2 +1,8 @@
-// Enterprise PII Guardrails n8n Community Node Package
-module.exports = {};
+const { PiiGuardrails } = require('./dist/nodes/PiiGuardrails/PiiGuardrails.node.js');
+const { PiiGuardrailsApi } = require('./dist/credentials/PiiGuardrailsApi.credentials.js');
+
+module.exports = {
+	PiiGuardrails,
+	PiiGuardrailsApi,
+};
+
