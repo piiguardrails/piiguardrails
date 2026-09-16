@@ -11,7 +11,7 @@ This artifact contains the metadata, title, SEO description, and verified workfl
 | **Template Title** | `Redact sensitive PII in AI prompts and restore responses with Enterprise PII Guardrails` | Strictly adheres to: `Action verb + thing being manipulated + with/to/in where` (sentence-case, no emojis) |
 | **Primary Category** | `AI` | High-intent search ranking |
 | **Secondary Categories / Tags** | `Security`, `Privacy`, `OpenAI`, `Compliance`, `Community Nodes` | Discoverability tags |
-| **Package Dependency** | `n8n-nodes-piiguardrails` (npm v0.1.6) | Official Community Node |
+| **Package Dependency** | `n8n-nodes-piiguardrails` (npm v0.1.7) | Official Community Node |
 | **Required n8n Version** | `v1.0.0+` | Self-hosted (Docker / npm / Desktop) |
 
 ---
