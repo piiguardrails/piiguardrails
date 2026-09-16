@@ -1,0 +1,285 @@
+"use strict";
+/**
+ * Copyright (c) 2026 piiguardrails.com. All Rights Reserved.
+ *
+ * PROPRIETARY & CONFIDENTIAL.
+ * This software and its underlying architecture, protocols, and schemas are protected by
+ * intellectual property laws and the Enterprise Software Connector License Agreement.
+ * Unauthorized copying, cloning, or distribution is strictly prohibited.
+ */
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.PiiGuardrails = void 0;
+const n8n_workflow_1 = require("n8n-workflow");
+class PiiGuardrails {
+    constructor() {
+        this.description = {
+            displayName: 'Enterprise PII Guardrails',
+            name: 'piiGuardrails',
+            icon: 'file:piiGuardrails.svg',
+            group: ['input'],
+            version: 1,
+            subtitle: '={{$parameter["operation"]}}',
+            description: 'Zero-leakage PII masking, token restoration, and privacy guardrails for AI/LLM workflows',
+            defaults: {
+                name: 'Enterprise PII Guardrails',
+            },
+            inputs: ['main'],
+            outputs: ['main'],
+            usableAsTool: true,
+            documentationUrl: 'https://www.npmjs.com/package/n8n-nodes-piiguardrails#readme',
+            credentials: [
+                {
+                    name: 'piiGuardrailsApi',
+                    required: true,
+                },
+            ],
+            properties: [
+                {
+                    displayName: 'Operation',
+                    name: 'operation',
+                    type: 'options',
+                    noDataExpression: true,
+                    options: [
+                        {
+                            name: 'Mask (Sanitize Prompt)',
+                            value: 'mask',
+                            description: 'Scrub sensitive PII (names, emails, phones, SSNs, cards, secrets) and generate token mapping',
+                            action: 'Mask sensitive PII in text or JSON',
+                        },
+                        {
+                            name: 'Unmask (Restore Output)',
+                            value: 'unmask',
+                            description: 'Restore original values into LLM output using the token mapping',
+                            action: 'Restore original PII from mapping',
+                        },
+                        {
+                            name: 'Scan / Audit (Detect Only)',
+                            value: 'scan',
+                            description: 'Inspect text for sensitive PII entities without modifying the content',
+                            action: 'Scan text for PII without modifying',
+                        },
+                    ],
+                    default: 'mask',
+                },
+                // ─── MASK PARAMETERS ───────────────────────────
+                {
+                    displayName: 'Input Text / JSON',
+                    name: 'text',
+                    type: 'string',
+                    typeOptions: {
+                        rows: 5,
+                    },
+                    default: '={{ $json.text || $json.body || $json.content || "" }}',
+                    placeholder: 'Customer John Doe (john@example.com) requested password reset for account 4532-1234-5678-9012.',
+                    description: 'The text, prompt, or JSON payload to scrub of sensitive PII before forwarding to an LLM or external service',
+                    required: true,
+                    displayOptions: {
+                        show: {
+                            operation: ['mask'],
+                        },
+                    },
+                },
+                // ─── UNMASK PARAMETERS ─────────────────────────
+                {
+                    displayName: 'Masked Text',
+                    name: 'unmaskText',
+                    type: 'string',
+                    typeOptions: {
+                        rows: 5,
+                    },
+                    default: '={{ $json.response || $json.output || $json.content || $json.text || "" }}',
+                    placeholder: 'Response from LLM containing tokens like [HUMAN_NAME_1] or [EMAIL_ADDRESS_1]',
+                    description: 'The response from the LLM or third-party service containing masked tokens',
+                    required: true,
+                    displayOptions: {
+                        show: {
+                            operation: ['unmask'],
+                        },
+                    },
+                },
+                {
+                    displayName: 'Token Mapping',
+                    name: 'mapping',
+                    type: 'json',
+                    default: '={{ $json.mapping || $("Enterprise PII Guardrails").item.json.mapping || {} }}',
+                    placeholder: '{\"[HUMAN_NAME_1]\": \"John Doe\"}',
+                    description: 'The mapping dictionary generated by the upstream Mask operation to restore original values',
+                    required: true,
+                    displayOptions: {
+                        show: {
+                            operation: ['unmask'],
+                        },
+                    },
+                },
+                // ─── SCAN PARAMETERS ───────────────────────────
+                {
+                    displayName: 'Input Text to Audit',
+                    name: 'scanText',
+                    type: 'string',
+                    typeOptions: {
+                        rows: 5,
+                    },
+                    default: '={{ $json.text || $json.body || $json.content || "" }}',
+                    placeholder: 'Text to scan for compliance without altering content',
+                    description: 'Text to inspect for sensitive PII entities, card numbers, or secrets',
+                    required: true,
+                    displayOptions: {
+                        show: {
+                            operation: ['scan'],
+                        },
+                    },
+                },
+            ],
+        };
+    }
+    async execute() {
+        const items = this.getInputData();
+        const returnData = [];
+        const operation = this.getNodeParameter('operation', 0);
+        const credentials = await this.getCredentials('piiGuardrailsApi');
+        const baseUrl = credentials.baseUrl.replace(/\/+$/, '');
+        const apiKey = credentials.apiKey;
+        for (let i = 0; i < items.length; i++) {
+            try {
+                if (operation === 'mask') {
+                    let text = this.getNodeParameter('text', i);
+                    if (typeof text === 'object' && text !== null) {
+                        text = JSON.stringify(text);
+                    }
+                    const response = await this.helpers.httpRequest({
+                        method: 'POST',
+                        url: `${baseUrl}/mask`,
+                        headers: {
+                            'x-api-key': apiKey,
+                            'Content-Type': 'application/json',
+                            'User-Agent': 'n8n-nodes-piiguardrails/0.1.0',
+                        },
+                        body: {
+                            text,
+                        },
+                        json: true,
+                    });
+                    const interceptionCounts = response.interception_counts || {};
+                    const totalEntities = Object.values(interceptionCounts).reduce((acc, val) => acc + (typeof val === 'number' ? val : 0), 0);
+                    returnData.push({
+                        json: {
+                            masked_text: response.masked_text,
+                            mapping: response.mapping || {},
+                            interception_counts: interceptionCounts,
+                            entity_count: totalEntities,
+                            original_text: text,
+                            highlighted_html: response.highlighted_html,
+                        },
+                        pairedItem: {
+                            item: i,
+                        },
+                    });
+                }
+                else if (operation === 'unmask') {
+                    let unmaskText = this.getNodeParameter('unmaskText', i);
+                    if (typeof unmaskText === 'object' && unmaskText !== null) {
+                        unmaskText = JSON.stringify(unmaskText);
+                    }
+                    let mapping = this.getNodeParameter('mapping', i);
+                    if (typeof mapping === 'string') {
+                        try {
+                            mapping = JSON.parse(mapping);
+                        }
+                        catch (e) {
+                            throw new n8n_workflow_1.NodeOperationError(this.getNode(), 'Mapping must be a valid JSON object or expression returning an object', { itemIndex: i });
+                        }
+                    }
+                    const response = await this.helpers.httpRequest({
+                        method: 'POST',
+                        url: `${baseUrl}/unmask`,
+                        headers: {
+                            'x-api-key': apiKey,
+                            'Content-Type': 'application/json',
+                            'User-Agent': 'n8n-nodes-piiguardrails/0.1.0',
+                        },
+                        body: {
+                            text: unmaskText,
+                            mapping: mapping || {},
+                        },
+                        json: true,
+                    });
+                    returnData.push({
+                        json: {
+                            unmasked_text: response.unmasked_text,
+                            restored_count: Object.keys(mapping || {}).length,
+                            original_masked_text: unmaskText,
+                        },
+                        pairedItem: {
+                            item: i,
+                        },
+                    });
+                }
+                else if (operation === 'scan') {
+                    let scanText = this.getNodeParameter('scanText', i);
+                    if (typeof scanText === 'object' && scanText !== null) {
+                        scanText = JSON.stringify(scanText);
+                    }
+                    const response = await this.helpers.httpRequest({
+                        method: 'POST',
+                        url: `${baseUrl}/mask`,
+                        headers: {
+                            'x-api-key': apiKey,
+                            'Content-Type': 'application/json',
+                            'User-Agent': 'n8n-nodes-piiguardrails/0.1.0',
+                        },
+                        body: {
+                            text: scanText,
+                        },
+                        json: true,
+                    });
+                    const interceptionCounts = response.interception_counts || {};
+                    const totalEntities = Object.values(interceptionCounts).reduce((acc, val) => acc + (typeof val === 'number' ? val : 0), 0);
+                    returnData.push({
+                        json: {
+                            has_pii: totalEntities > 0,
+                            entity_count: totalEntities,
+                            interception_counts: interceptionCounts,
+                            detected_entities: Object.keys(interceptionCounts),
+                            text: scanText,
+                        },
+                        pairedItem: {
+                            item: i,
+                        },
+                    });
+                }
+            }
+            catch (error) {
+                if (this.continueOnFail()) {
+                    returnData.push({
+                        json: {
+                            error: error.message,
+                        },
+                        pairedItem: {
+                            item: i,
+                        },
+                    });
+                    continue;
+                }
+                let userMessage = error.message;
+                const detail = error.response?.body?.detail || error.cause?.response?.body?.detail;
+                if (error.code === 'ECONNREFUSED' || error.message?.includes('ECONNREFUSED')) {
+                    userMessage = `Could not connect to Enterprise PII Guardrails server at ${baseUrl}. Ensure your server is running and accessible. (If n8n is containerized, use http://localhost:8000 for host-network mode, or http://host.containers.internal:8000 for bridge mode)`;
+                }
+                else if (error.statusCode === 403 || error.response?.statusCode === 403) {
+                    userMessage = detail ? `Access Denied / Threat Blocked: ${detail}` : `Authentication failed or entity blocked: ${error.message}`;
+                }
+                else if (error.statusCode === 422 || error.response?.statusCode === 422) {
+                    userMessage = detail ? `Payload validation error: ${typeof detail === 'string' ? detail : JSON.stringify(detail)}` : `Payload validation error: ${error.message}`;
+                }
+                else if (detail) {
+                    userMessage = `${detail} (${error.message})`;
+                }
+                throw new n8n_workflow_1.NodeOperationError(this.getNode(), userMessage, {
+                    itemIndex: i,
+                });
+            }
+        }
+        return [returnData];
+    }
+}
+exports.PiiGuardrails = PiiGuardrails;
