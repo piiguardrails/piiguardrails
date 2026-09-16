@@ -150,7 +150,7 @@ class PiiGuardrails {
                         url: `${baseUrl}/mask`,
                         headers: {
                             'Content-Type': 'application/json',
-                            'User-Agent': 'n8n-nodes-piiguardrails/0.1.5',
+                            'User-Agent': 'n8n-nodes-piiguardrails/0.1.6',
                         },
                         body: {
                             text,
@@ -192,7 +192,7 @@ class PiiGuardrails {
                         url: `${baseUrl}/unmask`,
                         headers: {
                             'Content-Type': 'application/json',
-                            'User-Agent': 'n8n-nodes-piiguardrails/0.1.5',
+                            'User-Agent': 'n8n-nodes-piiguardrails/0.1.6',
                         },
                         body: {
                             text: unmaskText,
@@ -221,7 +221,7 @@ class PiiGuardrails {
                         url: `${baseUrl}/mask`,
                         headers: {
                             'Content-Type': 'application/json',
-                            'User-Agent': 'n8n-nodes-piiguardrails/0.1.5',
+                            'User-Agent': 'n8n-nodes-piiguardrails/0.1.6',
                         },
                         body: {
                             text: scanText,
