@@ -1,13 +1,96 @@
 {
-  "name": "PII-Safe LLM Pipeline (Enterprise Guardrails)",
+  "name": "Redact sensitive PII in AI prompts and restore responses with Enterprise PII Guardrails",
   "nodes": [
     {
+      "parameters": {
+        "content": "## \ud83d\udee1\ufe0f Enterprise PII Guardrails: Zero-Leak AI Pipeline\n\n### What it does\nAutomatically scrubs personal and sensitive entities (names, email addresses, phone numbers, credit card numbers, medical record numbers) from incoming prompts before forwarding them to an LLM, then restores original values in the final response.\n\n### Quick Start\n1. **Start Gateway**: `pip install piiguardrails && piiguardrails start`\n2. **Credentials**: Configure your local `Enterprise PII Guardrails API` credentials (default: `http://localhost:8000`).\n3. **Execute**: Click \"Test step\" on the trigger node to run the complete pipeline.\n\n*Note: Custom community nodes require a self-hosted n8n instance.*",
+        "height": 380,
+        "width": 460,
+        "color": 4
+      },
+      "id": "sticky-main-overview",
+      "name": "Template Overview Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        180,
+        80
+      ]
+    },
+    {
+      "parameters": {
+        "content": "### 1. Ingestion\nReceives incoming user payload containing raw sensitive customer information.",
+        "height": 280,
+        "width": 480,
+        "color": 7
+      },
+      "id": "sticky-phase-1",
+      "name": "Phase 1 Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        180,
+        480
+      ]
+    },
+    {
+      "parameters": {
+        "content": "### 2. PII Scrubbing\nReplaces private entities with cryptographically reversible surrogate tokens under 25ms.",
+        "height": 280,
+        "width": 260,
+        "color": 7
+      },
+      "id": "sticky-phase-2",
+      "name": "Phase 2 Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        700,
+        480
+      ]
+    },
+    {
+      "parameters": {
+        "content": "### 3. LLM Inference\nSends sanitized prompt to LLM. Safe against third-party training and API leaks.",
+        "height": 280,
+        "width": 260,
+        "color": 7
+      },
+      "id": "sticky-phase-3",
+      "name": "Phase 3 Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1000,
+        480
+      ]
+    },
+    {
+      "parameters": {
+        "content": "### 4. Restore PII\nReconstructs original entities from safe surrogate tokens within your secure perimeter.",
+        "height": 280,
+        "width": 280,
+        "color": 7
+      },
+      "id": "sticky-phase-4",
+      "name": "Phase 4 Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1300,
+        480
+      ]
+    },
+    {
       "parameters": {},
-      "id": "1",
-      "name": "Start / Manual Trigger",
+      "id": "node-1-trigger",
+      "name": "Manual Test Trigger",
       "type": "n8n-nodes-base.manualTrigger",
       "typeVersion": 1,
-      "position": [240, 300]
+      "position": [
+        240,
+        580
+      ]
     },
     {
       "parameters": {
@@ -21,22 +104,28 @@
         },
         "options": {}
       },
-      "id": "2",
-      "name": "Sample Customer Prompt",
+      "id": "node-2-set-prompt",
+      "name": "Set Customer Prompt with PII",
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
-      "position": [460, 300]
+      "position": [
+        460,
+        580
+      ]
     },
     {
       "parameters": {
         "operation": "mask",
         "text": "={{ $json.customer_prompt }}"
       },
-      "id": "3",
-      "name": "PII Guardrails: Mask",
+      "id": "node-3-mask-pii",
+      "name": "Mask PII with Enterprise Guardrails",
       "type": "n8n-nodes-piiguardrails.piiGuardrails",
       "typeVersion": 1,
-      "position": [680, 300],
+      "position": [
+        740,
+        580
+      ],
       "credentials": {
         "piiGuardrailsApi": {
           "id": "1",
@@ -56,23 +145,29 @@
         },
         "options": {}
       },
-      "id": "4",
-      "name": "LLM Processing (Simulated OpenAI)",
+      "id": "node-4-simulated-llm",
+      "name": "Process Prompt with LLM (Simulated)",
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
-      "position": [900, 300]
+      "position": [
+        1040,
+        580
+      ]
     },
     {
       "parameters": {
         "operation": "unmask",
         "unmaskText": "={{ $json.llm_raw_response }}",
-        "mapping": "={{ $('PII Guardrails: Mask').item.json.mapping }}"
+        "mapping": "={{ $('Mask PII with Enterprise Guardrails').item.json.mapping }}"
       },
-      "id": "5",
-      "name": "PII Guardrails: Unmask",
+      "id": "node-5-unmask-pii",
+      "name": "Restore Original PII from Tokens",
       "type": "n8n-nodes-piiguardrails.piiGuardrails",
       "typeVersion": 1,
-      "position": [1120, 300],
+      "position": [
+        1340,
+        580
+      ],
       "credentials": {
         "piiGuardrailsApi": {
           "id": "1",
@@ -82,44 +177,44 @@
     }
   ],
   "connections": {
-    "Start / Manual Trigger": {
+    "Manual Test Trigger": {
       "main": [
         [
           {
-            "node": "Sample Customer Prompt",
+            "node": "Set Customer Prompt with PII",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Sample Customer Prompt": {
+    "Set Customer Prompt with PII": {
       "main": [
         [
           {
-            "node": "PII Guardrails: Mask",
+            "node": "Mask PII with Enterprise Guardrails",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "PII Guardrails: Mask": {
+    "Mask PII with Enterprise Guardrails": {
       "main": [
         [
           {
-            "node": "LLM Processing (Simulated OpenAI)",
+            "node": "Process Prompt with LLM (Simulated)",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "LLM Processing (Simulated OpenAI)": {
+    "Process Prompt with LLM (Simulated)": {
       "main": [
         [
           {
-            "node": "PII Guardrails: Unmask",
+            "node": "Restore Original PII from Tokens",
             "type": "main",
             "index": 0
           }
