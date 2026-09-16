@@ -14,7 +14,7 @@ import type {
 	INodeType,
 	INodeTypeDescription,
 } from 'n8n-workflow';
-import { NodeOperationError } from 'n8n-workflow';
+import { NodeConnectionTypes, NodeOperationError } from 'n8n-workflow';
 
 export class PiiGuardrails implements INodeType {
 	description: INodeTypeDescription = {
@@ -28,8 +28,8 @@ export class PiiGuardrails implements INodeType {
 		defaults: {
 			name: 'Enterprise PII Guardrails',
 		},
-		inputs: ['main'],
-		outputs: ['main'],
+		inputs: [NodeConnectionTypes.Main],
+		outputs: [NodeConnectionTypes.Main],
 		usableAsTool: true,
 		documentationUrl: 'https://www.npmjs.com/package/n8n-nodes-piiguardrails#readme',
 		credentials: [
@@ -146,8 +146,7 @@ export class PiiGuardrails implements INodeType {
 		const operation = this.getNodeParameter('operation', 0) as string;
 
 		const credentials = await this.getCredentials('piiGuardrailsApi');
-		const baseUrl = (credentials.baseUrl as string).replace(/\/+$/, '');
-		const apiKey = credentials.apiKey as string;
+		const baseUrl = ((credentials.baseUrl as string) || 'http://localhost:8000').replace(/\/+$/, '');
 
 		for (let i = 0; i < items.length; i++) {
 			try {
@@ -157,19 +156,22 @@ export class PiiGuardrails implements INodeType {
 						text = JSON.stringify(text);
 					}
 
-					const response = await this.helpers.httpRequest({
-						method: 'POST',
-						url: `${baseUrl}/mask`,
-						headers: {
-							'x-api-key': apiKey,
-							'Content-Type': 'application/json',
-							'User-Agent': 'n8n-nodes-piiguardrails/0.1.0',
+					const response = await this.helpers.httpRequestWithAuthentication.call(
+						this,
+						'piiGuardrailsApi',
+						{
+							method: 'POST',
+							url: `${baseUrl}/mask`,
+							headers: {
+								'Content-Type': 'application/json',
+								'User-Agent': 'n8n-nodes-piiguardrails/0.1.5',
+							},
+							body: {
+								text,
+							},
+							json: true,
 						},
-						body: {
-							text,
-						},
-						json: true,
-					});
+					);
 
 					const interceptionCounts = (response.interception_counts as IDataObject) || {};
 					const totalEntities = Object.values(interceptionCounts).reduce(
@@ -209,20 +211,23 @@ export class PiiGuardrails implements INodeType {
 						}
 					}
 
-					const response = await this.helpers.httpRequest({
-						method: 'POST',
-						url: `${baseUrl}/unmask`,
-						headers: {
-							'x-api-key': apiKey,
-							'Content-Type': 'application/json',
-							'User-Agent': 'n8n-nodes-piiguardrails/0.1.0',
+					const response = await this.helpers.httpRequestWithAuthentication.call(
+						this,
+						'piiGuardrailsApi',
+						{
+							method: 'POST',
+							url: `${baseUrl}/unmask`,
+							headers: {
+								'Content-Type': 'application/json',
+								'User-Agent': 'n8n-nodes-piiguardrails/0.1.5',
+							},
+							body: {
+								text: unmaskText,
+								mapping: mapping || {},
+							},
+							json: true,
 						},
-						body: {
-							text: unmaskText,
-							mapping: mapping || {},
-						},
-						json: true,
-					});
+					);
 
 					returnData.push({
 						json: {
@@ -240,19 +245,22 @@ export class PiiGuardrails implements INodeType {
 						scanText = JSON.stringify(scanText);
 					}
 
-					const response = await this.helpers.httpRequest({
-						method: 'POST',
-						url: `${baseUrl}/mask`,
-						headers: {
-							'x-api-key': apiKey,
-							'Content-Type': 'application/json',
-							'User-Agent': 'n8n-nodes-piiguardrails/0.1.0',
+					const response = await this.helpers.httpRequestWithAuthentication.call(
+						this,
+						'piiGuardrailsApi',
+						{
+							method: 'POST',
+							url: `${baseUrl}/mask`,
+							headers: {
+								'Content-Type': 'application/json',
+								'User-Agent': 'n8n-nodes-piiguardrails/0.1.5',
+							},
+							body: {
+								text: scanText,
+							},
+							json: true,
 						},
-						body: {
-							text: scanText,
-						},
-						json: true,
-					});
+					);
 
 					const interceptionCounts = (response.interception_counts as IDataObject) || {};
 					const totalEntities = Object.values(interceptionCounts).reduce(
