@@ -1,9 +1,10 @@
 {
   "name": "n8n-nodes-piiguardrails",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/piiguardrails/piiguardrails.git"
+    "url": "git+https://github.com/piiguardrails/piiguardrails.git",
+    "directory": "integrations/n8n-nodes-piiguardrails"
   },
   "description": "Enterprise PII Guardrails connector for n8n: Enterprise-grade PII masking, restoration, and compliance guardrails for AI/LLM workflows",
   "keywords": [
