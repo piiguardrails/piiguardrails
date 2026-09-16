@@ -23,8 +23,8 @@ class PiiGuardrails {
             defaults: {
                 name: 'Enterprise PII Guardrails',
             },
-            inputs: ['main'],
-            outputs: ['main'],
+            inputs: [n8n_workflow_1.NodeConnectionTypes.Main],
+            outputs: [n8n_workflow_1.NodeConnectionTypes.Main],
             usableAsTool: true,
             documentationUrl: 'https://www.npmjs.com/package/n8n-nodes-piiguardrails#readme',
             credentials: [
@@ -137,8 +137,7 @@ class PiiGuardrails {
         const returnData = [];
         const operation = this.getNodeParameter('operation', 0);
         const credentials = await this.getCredentials('piiGuardrailsApi');
-        const baseUrl = credentials.baseUrl.replace(/\/+$/, '');
-        const apiKey = credentials.apiKey;
+        const baseUrl = (credentials.baseUrl || 'http://localhost:8000').replace(/\/+$/, '');
         for (let i = 0; i < items.length; i++) {
             try {
                 if (operation === 'mask') {
@@ -146,13 +145,12 @@ class PiiGuardrails {
                     if (typeof text === 'object' && text !== null) {
                         text = JSON.stringify(text);
                     }
-                    const response = await this.helpers.httpRequest({
+                    const response = await this.helpers.httpRequestWithAuthentication.call(this, 'piiGuardrailsApi', {
                         method: 'POST',
                         url: `${baseUrl}/mask`,
                         headers: {
-                            'x-api-key': apiKey,
                             'Content-Type': 'application/json',
-                            'User-Agent': 'n8n-nodes-piiguardrails/0.1.0',
+                            'User-Agent': 'n8n-nodes-piiguardrails/0.1.5',
                         },
                         body: {
                             text,
@@ -189,13 +187,12 @@ class PiiGuardrails {
                             throw new n8n_workflow_1.NodeOperationError(this.getNode(), 'Mapping must be a valid JSON object or expression returning an object', { itemIndex: i });
                         }
                     }
-                    const response = await this.helpers.httpRequest({
+                    const response = await this.helpers.httpRequestWithAuthentication.call(this, 'piiGuardrailsApi', {
                         method: 'POST',
                         url: `${baseUrl}/unmask`,
                         headers: {
-                            'x-api-key': apiKey,
                             'Content-Type': 'application/json',
-                            'User-Agent': 'n8n-nodes-piiguardrails/0.1.0',
+                            'User-Agent': 'n8n-nodes-piiguardrails/0.1.5',
                         },
                         body: {
                             text: unmaskText,
@@ -219,13 +216,12 @@ class PiiGuardrails {
                     if (typeof scanText === 'object' && scanText !== null) {
                         scanText = JSON.stringify(scanText);
                     }
-                    const response = await this.helpers.httpRequest({
+                    const response = await this.helpers.httpRequestWithAuthentication.call(this, 'piiGuardrailsApi', {
                         method: 'POST',
                         url: `${baseUrl}/mask`,
                         headers: {
-                            'x-api-key': apiKey,
                             'Content-Type': 'application/json',
-                            'User-Agent': 'n8n-nodes-piiguardrails/0.1.0',
+                            'User-Agent': 'n8n-nodes-piiguardrails/0.1.5',
                         },
                         body: {
                             text: scanText,
