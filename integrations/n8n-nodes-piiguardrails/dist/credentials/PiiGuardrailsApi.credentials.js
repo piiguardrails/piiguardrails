@@ -13,6 +13,7 @@ class PiiGuardrailsApi {
     constructor() {
         this.name = 'piiGuardrailsApi';
         this.displayName = 'Enterprise PII Guardrails API';
+        this.icon = 'file:piiGuardrails.svg';
         this.documentationUrl = 'https://www.npmjs.com/package/n8n-nodes-piiguardrails#readme';
         this.properties = [
             {
