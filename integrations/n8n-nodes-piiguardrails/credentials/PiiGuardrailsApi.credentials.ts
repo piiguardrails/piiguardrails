@@ -7,16 +7,18 @@
  * Unauthorized copying, cloning, or distribution is strictly prohibited.
  */
 
-import {
+import type {
 	IAuthenticateGeneric,
 	ICredentialTestRequest,
 	ICredentialType,
 	INodeProperties,
+	Icon,
 } from 'n8n-workflow';
 
 export class PiiGuardrailsApi implements ICredentialType {
 	name = 'piiGuardrailsApi';
 	displayName = 'Enterprise PII Guardrails API';
+	icon: Icon = 'file:piiGuardrails.svg';
 	documentationUrl = 'https://www.npmjs.com/package/n8n-nodes-piiguardrails#readme';
 	properties: INodeProperties[] = [
 		{
