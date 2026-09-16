@@ -1,6 +1,6 @@
 {
   "name": "n8n-nodes-piiguardrails",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/piiguardrails/piiguardrails.git"
@@ -51,6 +51,6 @@
     "typescript": "^5.4.0"
   },
   "peerDependencies": {
-    "n8n-workflow": ">=1.0.0"
+    "n8n-workflow": "*"
   }
 }
