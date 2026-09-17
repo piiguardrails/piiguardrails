@@ -3,7 +3,7 @@
   "nodes": [
     {
       "parameters": {
-        "content": "## \ud83d\udee1\ufe0f Enterprise PII Guardrails: Zero-Leak AI Pipeline\n\n### What it does\nAutomatically scrubs personal and sensitive entities (names, email addresses, phone numbers, credit card numbers, medical record numbers) from incoming prompts before forwarding them to an LLM, then restores original values in the final response.\n\n### Quick Start\n1. **Start Gateway**: `pip install piiguardrails && piiguardrails start`\n2. **Credentials**: Configure your local `Enterprise PII Guardrails API` credentials (default: `http://localhost:8000`).\n3. **Execute**: Click \"Test step\" on the trigger node to run the complete pipeline.\n\n*Note: Custom community nodes require a self-hosted n8n instance.*",
+        "content": "## \ud83d\udee1\ufe0f Enterprise PII Guardrails: Zero-Leak AI Pipeline\n\n### What it does\nAutomatically scrubs personal and sensitive entities (names, email addresses, phone numbers, credit card numbers, medical record numbers) from incoming prompts before forwarding them to an LLM, then restores original values in the final response within your secure perimeter.\n\n### Quick Start (Live Cloud Sandbox)\n1. **Get Free Demo Key**: Visit **https://demo.piiguardrails.com** and click \"API Keys\" in the header to copy your instant demo key.\n2. **Guardrails Credentials**: In n8n, set Base URL to `https://demo.piiguardrails.com` (or `http://localhost:8000` for on-prem) and paste your API Key.\n3. **Execute**: Click \"Test step\" on 'Manual Test Trigger' to run the complete pipeline.\n\n*Note: This self-contained template uses a simulated LLM node, requiring zero third-party AI keys.*",
         "height": 380,
         "width": 460,
         "color": 4
@@ -51,7 +51,7 @@
     },
     {
       "parameters": {
-        "content": "### 3. LLM Inference\nSends sanitized prompt to LLM. Safe against third-party training and API leaks.",
+        "content": "### 3. LLM Inference (Simulated)\nProcesses the prompt using safe surrogate tokens. Zero raw customer data is leaked.",
         "height": 280,
         "width": 260,
         "color": 7
@@ -94,11 +94,13 @@
     },
     {
       "parameters": {
-        "values": {
-          "string": [
+        "assignments": {
+          "assignments": [
             {
+              "id": "c1a2b3d4-5e6f-7a8b-9c0d-1e2f3a4b5c6d",
               "name": "customer_prompt",
-              "value": "Hello support, my name is Alice Smith (alice.smith@healthcare.corp, phone 415-555-2671). Please check my claim record MRN-998234 and credit card 4111-2222-3333-4444."
+              "value": "Hello Support,\n\nMy name is Alice Smith, email: alice.smith@healthcare.corp, phone: +1-415-555-2671. Please check my claim record MRN-998234 and credit card 4111-2222-3333-4444.\n\nThank you!",
+              "type": "string"
             }
           ]
         },
@@ -135,11 +137,13 @@
     },
     {
       "parameters": {
-        "values": {
-          "string": [
+        "assignments": {
+          "assignments": [
             {
+              "id": "d2e3f4a5-6b7c-8d9e-0f1a-2b3c4d5e6f7a",
               "name": "llm_raw_response",
-              "value": "=Thank you for reaching out, {{ $json.masked_text.includes('[HUMAN_NAME_1]') ? '[HUMAN_NAME_1]' : 'valued customer' }}. We have verified your request regarding [MEDICAL_RECORD_NUMBER_1] and your card [CREDIT_CARD_1]. A confirmation has been dispatched to [EMAIL_ADDRESS_1]."
+              "value": "=Dear <PERSON_1>,\n\nWe have received and verified your inquiry regarding claim record <MEDICAL_RECORD_1> and your card <CREDIT_CARD_1>.\n\nA confirmation receipt has been dispatched to your email at <EMAIL_1> and via SMS to <PHONE_1>.\n\nBest regards,\nCustomer Support Team",
+              "type": "string"
             }
           ]
         },
