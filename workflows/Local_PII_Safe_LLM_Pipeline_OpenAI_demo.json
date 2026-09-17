@@ -1,0 +1,245 @@
+{
+  "name": "Redact sensitive PII in AI prompts and restore OpenAI responses with Enterprise PII Guardrails",
+  "nodes": [
+    {
+      "parameters": {
+        "content": "## \ud83d\udee1\ufe0f Enterprise PII Guardrails + OpenAI End-to-End Pipeline\n\n### What it does\nDemonstrates live, zero-leak AI inference with OpenAI (`gpt-4o-mini`) using Enterprise PII Guardrails:\n1. **Scrub**: Converts names, emails, phone numbers, SSNs, credit cards, and addresses into reversible surrogate tokens in <25ms.\n2. **Infer**: Hands the sanitized prompt to OpenAI. The model resolves the request using surrogate tokens without ever seeing sensitive data.\n3. **Restore**: Automatically restores original private customer values within your secure infrastructure perimeter.\n\n### Quick Start (Live Cloud Sandbox)\n1. **Get Free Demo Key**: Visit **https://demo.piiguardrails.com** and click \"API Keys\" in the header to copy your instant demo key.\n2. **Guardrail Credentials**: In n8n, set Base URL to `https://demo.piiguardrails.com` (or `http://localhost:8000` for on-prem) and paste your API Key.\n3. **OpenAI Credentials**: Configure your `OpenAI account` credentials (API Key).\n4. **Execute**: Click \"Test step\" on 'Manual Test Trigger' to execute the end-to-end pipeline.",
+        "height": 380,
+        "width": 460,
+        "color": 4
+      },
+      "id": "sticky-main-overview",
+      "name": "Template Overview Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        180,
+        80
+      ]
+    },
+    {
+      "parameters": {
+        "content": "### 1. Ingestion\nReceives incoming user payload containing raw sensitive customer information.",
+        "height": 280,
+        "width": 480,
+        "color": 7
+      },
+      "id": "sticky-phase-1",
+      "name": "Phase 1 Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        180,
+        480
+      ]
+    },
+    {
+      "parameters": {
+        "content": "### 2. PII Scrubbing\nReplaces private entities with cryptographically reversible surrogate tokens under 25ms.",
+        "height": 280,
+        "width": 260,
+        "color": 7
+      },
+      "id": "sticky-phase-2",
+      "name": "Phase 2 Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        700,
+        480
+      ]
+    },
+    {
+      "parameters": {
+        "content": "### 3. OpenAI Inference\nSends sanitized prompt with surrogate tokens to OpenAI (`gpt-4o-mini`). Zero private data is leaked to OpenAI.",
+        "height": 280,
+        "width": 260,
+        "color": 7
+      },
+      "id": "sticky-phase-3",
+      "name": "Phase 3 Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1000,
+        480
+      ]
+    },
+    {
+      "parameters": {
+        "content": "### 4. Restore PII\nReconstructs original entities from safe surrogate tokens within your secure perimeter.",
+        "height": 280,
+        "width": 280,
+        "color": 7
+      },
+      "id": "sticky-phase-4",
+      "name": "Phase 4 Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1300,
+        480
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "node-1-trigger",
+      "name": "Manual Test Trigger",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        240,
+        580
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "f8a7c2e1-5b3d-4c9a-8e2f-1a3b4c5d6e7f",
+              "name": "customer_prompt",
+              "value": "Hello Support,\n\nMy name is Sarah Jenkins, email: sarah.jenkins@acme-corp.com, phone: +1-415-555-2671. I need urgent assistance regarding my account 8849102381 and recent billing. My SSN on file is 982-12-4091 and my billing address is 742 Evergreen Terrace, Springfield, OR.\n\nI noticed an unauthorized charge on my Visa 4111-2222-3333-4444 (exp: 12/28). Please reverse this dispute charge immediately and send confirmation to my primary email and cc my alternate email at david.miller@acme-corp.com.\n\nThank you!",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "node-2-set-prompt",
+      "name": "Set Customer Prompt with PII",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        460,
+        580
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "mask",
+        "text": "={{ $json.customer_prompt }}"
+      },
+      "id": "node-3-mask-pii",
+      "name": "Mask PII with Enterprise Guardrails",
+      "type": "n8n-nodes-piiguardrails.piiGuardrails",
+      "typeVersion": 1,
+      "position": [
+        740,
+        580
+      ],
+      "credentials": {
+        "piiGuardrailsApi": {
+          "id": "1",
+          "name": "Enterprise PII Guardrails API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "text",
+        "operation": "message",
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4o-mini",
+          "mode": "list"
+        },
+        "messages": {
+          "values": [
+            {
+              "role": "system",
+              "content": "You are an enterprise customer support AI assistant. Answer customer requests clearly, politely, and helpfully. When referring to account numbers, names, addresses, credit cards, or email addresses, strictly preserve and output the exact placeholder surrogate tokens from the prompt (e.g. <PERSON_1>, <BANK_ACCOUNT_1>, <SSN_1>, <STREET_ADDRESS_1>, <CREDIT_CARD_1>, <CREDIT_CARD_EXPIRY_1>, <EMAIL_1>, <EMAIL_2>, <PHONE_1>) in your response."
+            },
+            {
+              "role": "user",
+              "content": "={{ $json.masked_text }}"
+            }
+          ]
+        },
+        "simplify": true,
+        "options": {}
+      },
+      "id": "node-4-openai",
+      "name": "OpenAI",
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [
+        1040,
+        580
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "1",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "unmask",
+        "unmaskText": "={{ $json.message?.content || $json.output || $json.text || $json.response }}",
+        "mapping": "={{ $('Mask PII with Enterprise Guardrails').item.json.mapping }}"
+      },
+      "id": "node-5-unmask-pii",
+      "name": "Restore Original PII from Tokens",
+      "type": "n8n-nodes-piiguardrails.piiGuardrails",
+      "typeVersion": 1,
+      "position": [
+        1340,
+        580
+      ],
+      "credentials": {
+        "piiGuardrailsApi": {
+          "id": "1",
+          "name": "Enterprise PII Guardrails API"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Manual Test Trigger": {
+      "main": [
+        [
+          {
+            "node": "Set Customer Prompt with PII",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Customer Prompt with PII": {
+      "main": [
+        [
+          {
+            "node": "Mask PII with Enterprise Guardrails",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mask PII with Enterprise Guardrails": {
+      "main": [
+        [
+          {
+            "node": "OpenAI",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI": {
+      "main": [
+        [
+          {
+            "node": "Restore Original PII from Tokens",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  }
+}
