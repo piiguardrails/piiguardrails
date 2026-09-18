@@ -29,7 +29,11 @@ get_metadata() {
     fi
 }
 
-GUI_PASSWORD=$(get_metadata "gui_password" "Admin@12345")
+GUI_PASSWORD=$(get_metadata "gui_password" "")
+if [ -z "$GUI_PASSWORD" ]; then
+    GUI_PASSWORD=$(openssl rand -hex 12)
+    echo "Generated secure random GUI password."
+fi
 COMPANY_NAME=$(get_metadata "company_name" "GCP Demo")
 BRAND_LOGO=$(get_metadata "brand_logo" "")
 LICENSE_KEY=$(get_metadata "license_key" "")
