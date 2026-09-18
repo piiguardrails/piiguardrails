@@ -124,7 +124,18 @@ systemctl daemon-reload
 systemctl enable piiguardrail.service
 systemctl restart piiguardrail.service
 
+# 9. Query external IP from GCP metadata to print direct access URL
+EXT_IP=$(curl -s -f -H "Metadata-Flavor: Google" "http://metadata.google.internal/computeMetadata/v1/instance/network-interfaces/0/access-configs/0/external-ip" 2>/dev/null || true)
+if [ -z "$EXT_IP" ]; then
+    EXT_IP=$(curl -s -f https://ifconfig.me 2>/dev/null || true)
+fi
+
 echo "=========================================================="
 echo "Enterprise PII Guardrails initialized successfully!"
-echo "Service is running on port ${APP_PORT}."
+if [ -n "$EXT_IP" ]; then
+    echo "Web Studio Live URL: http://${EXT_IP}:${APP_PORT}"
+    echo "OpenAPI Specs:       http://${EXT_IP}:${APP_PORT}/docs"
+else
+    echo "Service is running on port ${APP_PORT}."
+fi
 echo "=========================================================="
