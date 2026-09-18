@@ -22,9 +22,9 @@ This deployment package provisions:
 ### Method 1: 1-Click Interactive Cloud Shell (Recommended)
 
 1. Click the **[Open in Cloud Shell](https://ssh.cloud.google.com/cloudshell/editor?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fpiiguardrails%2Fpiiguardrails&cloudshell_workspace=deployments/gcp&cloudshell_tutorial=README.md)** button above.
-2. In the Google Cloud Shell terminal, execute the interactive setup wizard:
-   ```bash
-   cd deployments/gcp && chmod +x deploy.sh && ./deploy.sh
+2. In the Google Cloud Shell terminal, run:
+   ```sh
+   bash deploy.sh
    ```
 3. Follow the interactive prompts for:
    - Admin Studio Password (min 8 characters)
