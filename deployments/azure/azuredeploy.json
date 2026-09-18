@@ -62,9 +62,18 @@
     },
     "location": {
       "type": "string",
-      "defaultValue": "[resourceGroup().location]",
+      "defaultValue": "eastus2",
+      "allowedValues": [
+        "eastus2",
+        "centralus",
+        "westus2",
+        "westeurope",
+        "northeurope",
+        "southeastasia",
+        "centralindia"
+      ],
       "metadata": {
-        "description": "Location for all resources. Defaults to the resource group's location."
+        "description": "Azure region for the VM and network resources. East US 2 is recommended for guaranteed compute capacity."
       }
     }
   },
