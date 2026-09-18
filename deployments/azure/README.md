@@ -2,7 +2,7 @@
 
 Deploy **Enterprise PII Guardrails** into your Microsoft Azure subscription in under 3 minutes with zero manual server configuration.
 
-[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fpiiguardrails.com%2Fazure%2Fazuredeploy.json)
+[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fpiiguardrails%2Fpiiguardrails%2Fmain%2Fdeployments%2Fazure%2Fazuredeploy.json)
 
 ---
 
@@ -20,7 +20,7 @@ This Azure Resource Manager (ARM) template automatically provisions:
 ## 1-Click Launch Instructions
 
 ### Step 1: Deploy Template in Azure Portal
-1. Click the **[Deploy to Azure](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fpiiguardrails.com%2Fazure%2Fazuredeploy.json)** button above.
+1. Click the **[Deploy to Azure](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fpiiguardrails%2Fpiiguardrails%2Fmain%2Fdeployments%2Fazure%2Fazuredeploy.json)** button above.
 2. Select your Azure **Subscription** and choose or create a **Resource Group** (e.g. `rg-piiguardrails`).
 3. Select your preferred Azure **Region** (e.g. `East US`, `West Europe`, `Central India`).
 4. Fill in the template parameters:
