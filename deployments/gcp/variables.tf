@@ -59,8 +59,8 @@ variable "brand_logo_url" {
 
 variable "license_key" {
   type        = string
-  default     = ""
-  description = "Optional preconfigured commercial license key. Leave blank for automatic 10,000 requests evaluation."
+  default     = "ED4-AQAGWNU7FAAAAJYQ-AAAAAAAAAAAAAKFI-VXRAU4YPAHXPW6JD-CRJIDR5NFJ4ITZA2-ICFCAEEV7OYVNWO7-JDSSZ5RMIUNDHULQ-DMZPYP4ICOFTJF53-AMKICAI6R57R4XM4-QYR4UGEQ4ZTP3DAM"
+  description = "Preconfigured evaluation license key (10,000 requests quota). Leave as default, or replace with your commercial license key."
 }
 
 variable "app_port" {
