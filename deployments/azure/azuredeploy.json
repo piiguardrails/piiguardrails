@@ -46,21 +46,6 @@
         "description": "Master administrative password to access the Enterprise PII Guardrails Studio Web UI (username: admin). Must be at least 8 characters."
       }
     },
-    "instanceSize": {
-      "type": "string",
-      "defaultValue": "Standard_D2s_v3",
-      "allowedValues": [
-        "Standard_B2s",
-        "Standard_D2s_v3",
-        "Standard_D4s_v3",
-        "Standard_D2s_v5",
-        "Standard_D4s_v5",
-        "Standard_F2s_v2"
-      ],
-      "metadata": {
-        "description": "Azure Compute VM size. Standard_D2s_v3 (2 vCPU, 8GB RAM) is strongly recommended as the baseline for low-latency PII detection, regex profiling, and reversible tokenization."
-      }
-    },
     "allowedInboundCIDR": {
       "type": "string",
       "defaultValue": "*",
@@ -225,7 +210,7 @@
       ],
       "properties": {
         "hardwareProfile": {
-          "vmSize": "[parameters('instanceSize')]"
+          "vmSize": "Standard_D2s_v3"
         },
         "storageProfile": {
           "imageReference": {
