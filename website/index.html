@@ -336,6 +336,16 @@
                     <svg class="w-4 h-4 text-cyan-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 17 10 11 4 5"></polyline><line x1="12" y1="19" x2="20" y2="19"></line></svg>
                     <span>Quickstart (pip / docker)</span>
                 </a>
+                <a href="/docs/aws-ec2.html" class="w-full sm:w-auto px-5 py-3.5 rounded-xl bg-amber-950/40 hover:bg-amber-900/60 border border-amber-500/40 hover:border-amber-400 text-amber-300 hover:text-white font-semibold text-xs sm:text-sm shadow-glow-amber transition-all flex items-center justify-center space-x-2 group">
+                    <svg class="w-4 h-4 text-amber-400 group-hover:scale-110 transition-transform shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/></svg>
+                    <span>1-Click AWS Deploy</span>
+                </a>
+                <a href="/docs/azure-vm.html" class="w-full sm:w-auto px-5 py-3.5 rounded-xl bg-blue-950/40 hover:bg-blue-900/60 border border-blue-500/40 hover:border-blue-400 text-blue-300 hover:text-white font-semibold text-xs sm:text-sm transition-all flex items-center justify-center space-x-2 group">
+                    <svg class="w-4 h-4 text-blue-400 group-hover:scale-110 transition-transform shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/>
+                    </svg>
+                    <span>1-Click Azure Deploy</span>
+                </a>
             </div>
 
             <!-- Live Metrics Bar -->
@@ -1369,6 +1379,18 @@
                             </svg>
                             <span>Docker Container</span>
                         </button>
+                        <button onclick="setDeployTab('aws')" class="deploy-tab px-3.5 py-1.5 rounded-xl bg-slate-900 text-slate-400 border border-slate-800 hover:text-white text-xs font-semibold transition-all inline-flex items-center gap-2 whitespace-nowrap">
+                            <svg class="w-3.5 h-3.5 text-amber-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/>
+                            </svg>
+                            <span>AWS EC2 (1-Click)</span>
+                        </button>
+                        <button onclick="setDeployTab('azure')" class="deploy-tab px-3.5 py-1.5 rounded-xl bg-slate-900 text-slate-400 border border-slate-800 hover:text-white text-xs font-semibold transition-all inline-flex items-center gap-2 whitespace-nowrap">
+                            <svg class="w-3.5 h-3.5 text-blue-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/>
+                            </svg>
+                            <span>Azure VM (1-Click)</span>
+                        </button>
                     </div>
                 </div>
 
@@ -1714,40 +1736,77 @@
                                 <span class="w-7 h-7 rounded-lg bg-purple-500/20 text-purple-300 border border-purple-500/30 font-mono font-bold text-xs flex items-center justify-center">03</span>
                                 <span class="text-[10px] font-mono text-slate-400 uppercase">Step 3</span>
                             </div>
-                            <h4 class="text-sm font-bold text-white">Import Verified Template</h4>
+                            <h4 class="text-sm font-bold text-white">Import Verified Templates</h4>
                             <p class="text-xs text-slate-400 mt-1 leading-relaxed">
                                 Open n8n canvas menu <strong class="text-slate-300">(...) &gt; Import from URL</strong> for instant zero-leak execution:
                             </p>
                         </div>
-                        <div class="mt-3 flex items-center justify-between p-2 rounded-lg bg-slate-900 border border-slate-800">
-                            <span class="text-[11px] font-mono text-purple-300 truncate select-all pr-2">Local_PII_Safe_LLM_Pipeline.json</span>
-                            <button onclick="copyN8nTemplateUrl()" class="px-2.5 py-1 rounded bg-slate-800 hover:bg-slate-700 text-[11px] font-semibold text-purple-300 hover:text-white border border-slate-700 transition-colors shrink-0">
-                                <span id="n8n-template-copy-text">Copy URL</span>
-                            </button>
+                        <div class="mt-3 space-y-2">
+                            <!-- Template 1: OpenAI Live Demo -->
+                            <div class="p-2 rounded-lg bg-slate-900 border border-slate-800 space-y-1">
+                                <div class="flex items-center justify-between">
+                                    <span class="text-[10px] font-bold text-emerald-400 flex items-center gap-1">
+                                        <span>⚡ OpenAI Live Demo</span>
+                                        <span class="text-[9px] font-normal text-slate-500">(gpt-4o-mini)</span>
+                                    </span>
+                                    <button onclick="copyN8nOpenAiTemplateUrl()" class="px-2 py-0.5 rounded bg-slate-800 hover:bg-slate-700 text-[10px] font-semibold text-emerald-300 hover:text-white border border-slate-700 transition-colors shrink-0">
+                                        <span id="n8n-openai-template-copy-text">Copy URL</span>
+                                    </button>
+                                </div>
+                                <div class="text-[10px] font-mono text-slate-400 truncate select-all">Local_PII_Safe_LLM_Pipeline_OpenAI_demo.json</div>
+                            </div>
+                            <!-- Template 2: Offline Generic -->
+                            <div class="p-2 rounded-lg bg-slate-900 border border-slate-800 space-y-1">
+                                <div class="flex items-center justify-between">
+                                    <span class="text-[10px] font-bold text-purple-300 flex items-center gap-1">
+                                        <span>🔒 Offline Pipeline</span>
+                                        <span class="text-[9px] font-normal text-slate-500">(No API Key)</span>
+                                    </span>
+                                    <button onclick="copyN8nTemplateUrl()" class="px-2 py-0.5 rounded bg-slate-800 hover:bg-slate-700 text-[10px] font-semibold text-purple-300 hover:text-white border border-slate-700 transition-colors shrink-0">
+                                        <span id="n8n-template-copy-text">Copy URL</span>
+                                    </button>
+                                </div>
+                                <div class="text-[10px] font-mono text-slate-400 truncate select-all">Local_PII_Safe_LLM_Pipeline.json</div>
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- Action CTAs Row -->
-                <div class="relative z-10 mt-6 pt-5 border-t border-slate-800/80 flex flex-wrap items-center justify-between gap-3 text-xs">
-                    <div class="flex flex-wrap items-center gap-2 sm:gap-3">
-                        <a href="/docs/n8n.html" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-[#EA4B71] hover:bg-[#EA4B71]/90 text-white font-bold transition-all shadow-md shadow-[#EA4B71]/20">
-                            <span>📘 Comprehensive n8n Integration Guide</span>
-                            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                <div class="relative z-10 mt-6 pt-5 border-t border-slate-800/80 space-y-3.5 text-xs">
+                    <!-- Top Actions Bar -->
+                    <div class="flex flex-wrap items-center justify-between gap-3">
+                        <div class="flex flex-wrap items-center gap-2 sm:gap-3">
+                            <a href="/docs/n8n.html" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-[#EA4B71] hover:bg-[#EA4B71]/90 text-white font-bold transition-all shadow-md shadow-[#EA4B71]/20">
+                                <span>📘 Comprehensive n8n Integration Guide</span>
+                                <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                            </a>
+                            <a href="https://www.npmjs.com/package/n8n-nodes-piiguardrails" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-200 hover:text-white font-semibold transition-all">
+                                <svg class="w-3.5 h-3.5 text-[#EA4B71]" viewBox="0 0 24 24" fill="currentColor"><path d="M0 7.334v8h6.666v1.332H12v-1.332h12v-8H0zm6.666 6.666H4V9.334h2.666v4.666zm5.334 0h-2.667V9.334H12v4.666zm9.334-2.666h-2.667v2.666h-1.333V9.334h4v2z"/></svg>
+                                <span>View on npm Registry</span>
+                            </a>
+                        </div>
+                        <button onclick="setClientTab('n8n'); const el = document.getElementById('step2-card') || document.getElementById('install'); if(el) el.scrollIntoView({behavior:'smooth'});" class="inline-flex items-center gap-1.5 text-slate-400 hover:text-pink-400 text-xs font-mono transition-colors">
+                            <span>View Step 2 n8n Code Tab</span>
+                            <span>&uarr;</span>
+                        </button>
+                    </div>
+
+                    <!-- Workflow Download Buttons Row -->
+                    <div class="flex flex-wrap items-center gap-2 sm:gap-3 pt-2.5 border-t border-slate-900/90">
+                        <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider flex items-center gap-1.5 mr-1">
+                            <svg class="w-3.5 h-3.5 text-purple-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                            <span>Download Templates:</span>
+                        </span>
+                        <a href="https://raw.githubusercontent.com/piiguardrails/piiguardrails/main/workflows/Local_PII_Safe_LLM_Pipeline_OpenAI_demo.json" download="Local_PII_Safe_LLM_Pipeline_OpenAI_demo.json" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 border border-emerald-500/30 hover:border-emerald-500/60 text-emerald-300 font-semibold text-xs transition-all shadow-sm">
+                            <svg class="w-3.5 h-3.5 text-emerald-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                            <span>OpenAI Live Demo (JSON)</span>
                         </a>
-                        <a href="https://www.npmjs.com/package/n8n-nodes-piiguardrails" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-200 hover:text-white font-semibold transition-all">
-                            <svg class="w-3.5 h-3.5 text-[#EA4B71]" viewBox="0 0 24 24" fill="currentColor"><path d="M0 7.334v8h6.666v1.332H12v-1.332h12v-8H0zm6.666 6.666H4V9.334h2.666v4.666zm5.334 0h-2.667V9.334H12v4.666zm9.334-2.666h-2.667v2.666h-1.333V9.334h4v2z"/></svg>
-                            <span>View on npm Registry</span>
-                        </a>
-                        <a href="https://github.com/piiguardrails/piiguardrails/blob/main/workflows/Local_PII_Safe_LLM_Pipeline.json" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-200 hover:text-white font-semibold transition-all">
-                            <svg class="w-3.5 h-3.5 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-                            <span>Download Workflow JSON</span>
+                        <a href="https://raw.githubusercontent.com/piiguardrails/piiguardrails/main/workflows/Local_PII_Safe_LLM_Pipeline.json" download="Local_PII_Safe_LLM_Pipeline.json" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 border border-purple-500/30 hover:border-purple-500/60 text-purple-300 font-semibold text-xs transition-all shadow-sm">
+                            <svg class="w-3.5 h-3.5 text-purple-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                            <span>Offline Pipeline (JSON)</span>
                         </a>
                     </div>
-                    <button onclick="setClientTab('n8n'); const el = document.getElementById('step2-card') || document.getElementById('install'); if(el) el.scrollIntoView({behavior:'smooth'});" class="inline-flex items-center gap-1.5 text-slate-400 hover:text-pink-400 text-xs font-mono transition-colors">
-                        <span>View Step 2 n8n Code Tab</span>
-                        <span>&uarr;</span>
-                    </button>
                 </div>
             </div>
 
@@ -2218,8 +2277,11 @@
                         <li><a href="https://pypi.org/project/piiguardrails/" target="_blank" rel="noreferrer" class="hover:text-cyan-400 transition-colors flex items-center gap-2"><svg class="w-3.5 h-3.5 shrink-0" viewBox="0 0 24 24" fill="currentColor"><path fill="#38bdf8" d="M11.91 2c-3.79 0-3.56 1.64-3.56 1.64l.01 1.7h3.63v.52H6.94S4.5 5.6 4.5 9.38c0 3.79 2.13 3.65 2.13 3.65h1.27v-1.78s-.07-2.13 2.1-2.13h3.63s2.03.03 2.03-1.99V4.1s.3-2.1-3.75-2.1zm-1.07 1.15c.37 0 .67.3.67.67s-.3.67-.67.67-.67-.3-.67-.67.3-.67.67-.67z"/><path fill="#facc15" d="M12.09 22c3.79 0 3.56-1.64 3.56-1.64l-.01-1.7h-3.63v-.52h5.05s2.44.26 2.44-3.52c0-3.79-2.13-3.65-2.13-3.65h-1.27v1.78s.07 2.13-2.1 2.13h-3.63s-2.03-.03-2.03 1.99V19.9s-.3 2.1 3.75 2.1zm1.07-1.15c-.37 0-.67-.3-.67-.67s.3-.67.67-.67.67.3.67.67-.3.67-.67.67z"/></svg><span>PyPI Package (piiguardrails)</span></a></li>
                         <li><a href="https://hub.docker.com/r/piiguardrails/enterprise-pii-guardrail" target="_blank" rel="noreferrer" class="hover:text-cyan-400 transition-colors flex items-center gap-2"><svg class="w-3.5 h-3.5 text-sky-400 shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M22.5 11.2c-.3-.2-.8-.3-1.3-.2-.2-.5-.5-.9-.9-1.2-.5-.4-1.1-.5-1.8-.4-.2-.6-.7-1.1-1.3-1.4-.7-.3-1.5-.3-2.2 0l-.3.1-.1-.3C14.2 6.5 13.3 6 12.3 6c-.8 0-1.5.3-2.1.8l-.4.4-.4-.4C8.8 6.3 8.1 6 7.3 6c-1 0-1.9.5-2.3 1.3l-.1.3-.3-.1c-.7-.3-1.5-.3-2.2 0-.6.3-1.1.8-1.3 1.4-.7-.1-1.3 0-1.8.4-.4.3-.7.7-.9 1.2-.5-.1-1 0-1.3.2-.4.3-.5.7-.5.7v2c.1 2.6 1.4 5 3.7 6.4 2 1.2 4.4 1.9 6.9 1.9 8.4 0 14.8-6 15-12.6.5-.4 1-1 1.2-2.1.1-.4 0-.6-.2-.8zm-9.3.6H11v-2h2.2v2zm-3 0H8v-2h2.2v2zm-3 0H5v-2h2.2v2zm6-3H11V6.8h2.2v2zm-3 0H8V6.8h2.2v2zm-3 0H5V6.8h2.2v2zm9 3h-2.2v-2h2.2v2zm0-3h-2.2V6.8h2.2v2zm3 3h-2.2v-2h2.2v2z"/></svg><span>Docker Hub Container</span></a></li>
                         <li><a href="https://www.npmjs.com/package/n8n-nodes-piiguardrails" target="_blank" rel="noreferrer" class="hover:text-cyan-400 transition-colors flex items-center gap-2"><svg class="w-3.5 h-3.5 text-[#EA4B71] shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M19.34 7.66a3.84 3.84 0 0 0-3.32-1.92h-.03a3.84 3.84 0 0 0-2.6 1.02L9.2 10.38a1.92 1.92 0 0 1-1.32.52H6.5a1.92 1.92 0 1 1 0-3.84h1.38c.51 0 .99-.2 1.35-.57l1.1-1.1A3.84 3.84 0 0 0 7.62 3.5H6.5a5.76 5.76 0 1 0 0 11.52h1.38c.5 0 .99-.2 1.32-.52l4.19-3.62a1.92 1.92 0 0 1 1.3-.52h.03a1.92 1.92 0 0 1 1.92 1.92 1.92 1.92 0 0 1-1.92 1.92h-1.38a1.92 1.92 0 0 0-1.35.57l-1.1 1.1a3.84 3.84 0 0 0 2.71 1.93h1.12a5.76 5.76 0 0 0 5.76-5.76 5.74 5.74 0 0 0-1.14-3.4z"/></svg><span>n8n Community Node (npm)</span></a></li>
+                        <li><a href="/docs/aws-ec2.html" class="hover:text-amber-400 transition-colors flex items-center gap-2"><svg class="w-3.5 h-3.5 text-amber-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/></svg><span>AWS EC2 1-Click Guide</span></a></li>
+                        <li><a href="/docs/azure-vm.html" class="hover:text-blue-400 transition-colors flex items-center gap-2"><svg class="w-3.5 h-3.5 text-blue-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg><span>Azure VM 1-Click Guide</span></a></li>
                         <li><a href="/docs/n8n.html" class="hover:text-cyan-400 transition-colors flex items-center gap-2"><svg class="w-3.5 h-3.5 text-cyan-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg><span>n8n Integration Guide</span></a></li>
-                        <li><a href="https://github.com/piiguardrails/piiguardrails/blob/main/workflows/Local_PII_Safe_LLM_Pipeline.json" target="_blank" rel="noreferrer" class="hover:text-cyan-400 transition-colors flex items-center gap-2"><svg class="w-3.5 h-3.5 text-purple-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg><span>n8n Workflow Template (JSON)</span></a></li>
+                        <li><a href="https://raw.githubusercontent.com/piiguardrails/piiguardrails/main/workflows/Local_PII_Safe_LLM_Pipeline_OpenAI_demo.json" download="Local_PII_Safe_LLM_Pipeline_OpenAI_demo.json" target="_blank" rel="noreferrer" class="hover:text-cyan-400 transition-colors flex items-center gap-2"><svg class="w-3.5 h-3.5 text-emerald-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg><span>n8n OpenAI Demo Workflow (JSON)</span></a></li>
+                        <li><a href="https://raw.githubusercontent.com/piiguardrails/piiguardrails/main/workflows/Local_PII_Safe_LLM_Pipeline.json" download="Local_PII_Safe_LLM_Pipeline.json" target="_blank" rel="noreferrer" class="hover:text-cyan-400 transition-colors flex items-center gap-2"><svg class="w-3.5 h-3.5 text-purple-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg><span>n8n Offline Workflow (JSON)</span></a></li>
                         <li><a href="https://youtu.be/w4i2gAFit_E" target="_blank" rel="noreferrer" class="hover:text-red-400 transition-colors flex items-center gap-2"><svg class="w-3.5 h-3.5 text-red-500 fill-current shrink-0" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg><span>YouTube Walkthrough (Video)</span></a></li>
                         <li><a href="#promo" class="hover:text-cyan-400 transition-colors flex items-center gap-2"><svg class="w-3.5 h-3.5 text-emerald-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg><span>6-Month Enterprise Key</span></a></li>
                         <li><a href="https://github.com/piiguardrails/piiguardrails/issues" target="_blank" rel="noreferrer" class="hover:text-cyan-400 transition-colors flex items-center gap-2"><svg class="w-3.5 h-3.5 text-purple-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg><span>Report Issue / Support</span></a></li>
@@ -2719,6 +2781,42 @@
                     '  <span class="text-amber-300">-e</span> <span class="text-sky-300">GUI_PASSWORD</span><span class="text-slate-400">=</span><span class="text-emerald-300">"&lt;your-secure-password&gt;"</span> <span class="text-slate-500">\\</span>',
                     '  <span class="text-amber-300">--name</span> <span class="text-yellow-300 font-medium">pii-guardrail-studio</span> <span class="text-slate-500">\\</span>',
                     '  <span class="text-cyan-300 font-semibold">piiguardrails/enterprise-pii-guardrail:latest</span>'
+                ]
+            },
+            aws: {
+                tabName: 'aws ec2 - 1-click cloudformation quickstart',
+                lang: 'AWS CLOUDFORMATION',
+                raw: `# 1-Click AWS EC2 Deployment (10,000 Evaluation Requests Included)
+# Launch directly in AWS CloudFormation console:
+https://console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/quickstart?templateURL=https://piiguardrails.com/aws/piiguardrails-ec2-1click.yaml&stackName=EnterprisePIIGuardrails`,
+                lines: [
+                    '<span class="text-slate-500 italic"># 1-Click AWS EC2 CloudFormation Deployment (10,000 Evaluation Requests Included)</span>',
+                    '<span class="text-amber-400 font-semibold">// 1. LAUNCH IN AWS CONSOLE IN 1-CLICK:</span>',
+                    '<span class="inline-flex items-center gap-2 pt-1 flex-wrap"><a href="https://console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/quickstart?templateURL=https://piiguardrails.com/aws/piiguardrails-ec2-1click.yaml&stackName=EnterprisePIIGuardrails" target="_blank" rel="noopener" class="px-3 py-1.5 rounded-lg bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-slate-950 font-bold text-xs shadow-glow-amber transition-all inline-flex items-center gap-1.5"><span>🚀 Launch on AWS Console</span><span>&rarr;</span></a><a href="/docs/aws-ec2.html" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-cyan-300 hover:text-white border border-slate-700 text-xs font-semibold transition-all">View Setup Guide &rarr;</a></span>',
+                    '',
+                    '<span class="text-slate-500 italic"># 2. Access Studio Web UI once CloudFormation shows CREATE_COMPLETE</span>',
+                    '<span class="text-slate-300">URL: </span><span class="text-cyan-400 font-mono">http://&lt;EC2_PUBLIC_IP&gt;:8000</span> <span class="text-slate-500">(user: admin)</span>',
+                    '',
+                    '<span class="text-slate-500 italic"># 3. Locate Server Hardware ID in Licensing Tab for in-place Node-Locked production upgrade</span>',
+                    '<span class="text-emerald-400 font-semibold italic text-[11px]">&#x2714; Full Step-by-Step EC2 Guide: </span><a href="/docs/aws-ec2.html" class="text-cyan-300 underline font-bold hover:text-cyan-200">Open /docs/aws-ec2.html &rarr;</a>'
+                ]
+            },
+            azure: {
+                tabName: 'azure vm - 1-click arm template quickstart',
+                lang: 'AZURE ARM TEMPLATE',
+                raw: `# 1-Click Microsoft Azure VM Deployment (10,000 Evaluation Requests Included)
+# Launch directly in Azure Portal custom deployment:
+https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fpiiguardrails%2Fpiiguardrails%2Fmain%2Fdeployments%2Fazure%2Fazuredeploy.json`,
+                lines: [
+                    '<span class="text-slate-500 italic"># 1-Click Azure VM ARM Template Deployment (10,000 Evaluation Requests Included)</span>',
+                    '<span class="text-blue-400 font-semibold">// 1. LAUNCH IN AZURE PORTAL IN 1-CLICK:</span>',
+                    '<span class="inline-flex items-center gap-2 pt-1 flex-wrap"><a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fpiiguardrails%2Fpiiguardrails%2Fmain%2Fdeployments%2Fazure%2Fazuredeploy.json" target="_blank" rel="noopener" class="px-3 py-1.5 rounded-lg bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-500 hover:to-cyan-500 text-white font-bold text-xs shadow-lg transition-all inline-flex items-center gap-1.5"><span>🚀 Deploy to Azure Portal</span><span>&rarr;</span></a><button onclick="copyArmTemplateJson(this)" class="px-2.5 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-cyan-300 hover:text-white border border-slate-700 text-xs font-semibold transition-all inline-flex items-center gap-1 cursor-pointer"><svg class="w-3.5 h-3.5 text-cyan-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span>Copy ARM JSON</span></button><a href="/docs/azure-vm.html" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-cyan-300 hover:text-white border border-slate-700 text-xs font-semibold transition-all">View Setup Guide &rarr;</a></span>',
+                    '',
+                    '<span class="text-slate-500 italic"># 2. Access Studio Web UI once Azure deployment status displays succeeded</span>',
+                    '<span class="text-slate-300">URL: </span><span class="text-cyan-400 font-mono">http://&lt;AZURE_PUBLIC_IP&gt;:8000</span> <span class="text-slate-500">(user: admin)</span>',
+                    '',
+                    '<span class="text-slate-500 italic"># 3. Locate Server Hardware ID in Licensing Tab for in-place Node-Locked production upgrade</span>',
+                    '<span class="text-emerald-400 font-semibold italic text-[11px]">&#x2714; Full Step-by-Step Azure Guide: </span><a href="/docs/azure-vm.html" class="text-cyan-300 underline font-bold hover:text-cyan-200">Open /docs/azure-vm.html &rarr;</a>'
                 ]
             }
         };
@@ -3257,8 +3355,11 @@ n8n-nodes-piiguardrails
 // Set "Base URL": https://demo.piiguardrails.com (or http://host.docker.internal:8000)
 // Set "API Key": Your studio API key or instant sandbox key
 
-// Step 3: Import Pre-Built Zero-Leakage Pipeline Template
-// Canvas Menu (...) -> "Import from URL" -> Paste:
+// Step 3: Import Verified Zero-Leakage Pipeline Templates
+// Canvas Menu (...) -> "Import from URL" -> Paste either:
+// Option A (Live OpenAI gpt-4o-mini Pipeline):
+https://raw.githubusercontent.com/piiguardrails/piiguardrails/main/workflows/Local_PII_Safe_LLM_Pipeline_OpenAI_demo.json
+// Option B (Offline Self-Contained Pipeline):
 https://raw.githubusercontent.com/piiguardrails/piiguardrails/main/workflows/Local_PII_Safe_LLM_Pipeline.json`,
                 lines: [
                     '<span class="text-slate-500 italic">// ═══════════════════════════════════════════════════════════════════════════════</span>',
@@ -3279,8 +3380,10 @@ https://raw.githubusercontent.com/piiguardrails/piiguardrails/main/workflows/Loc
                     '<span class="text-slate-500 italic">// ═══════════════════════════════════════════════════════════════════════════════</span>',
                     '<span class="text-pink-400 font-semibold">// 3. ONE-CLICK PRE-BUILT WORKFLOW IMPORT</span>',
                     '<span class="text-slate-500 italic">// ═══════════════════════════════════════════════════════════════════════════════</span>',
-                    '<span class="text-slate-300">Open canvas menu </span><span class="text-cyan-300 font-semibold">(...)</span><span class="text-slate-300"> &gt; </span><span class="text-emerald-300 font-semibold">Import from URL</span><span class="text-slate-300"> and paste template URL:</span>',
-                    '<span class="text-cyan-400 font-mono text-[11px] underline"><a href="https://raw.githubusercontent.com/piiguardrails/piiguardrails/main/workflows/Local_PII_Safe_LLM_Pipeline.json" target="_blank" rel="noopener">https://raw.githubusercontent.com/piiguardrails/piiguardrails/main/workflows/Local_PII_Safe_LLM_Pipeline.json</a></span>',
+                    '<span class="text-emerald-400 font-semibold text-[11px]">&bull; Option A (OpenAI Live Dispute Pipeline - gpt-4o-mini):</span>',
+                    '<span class="inline-flex items-center gap-2.5 pl-3 py-0.5 flex-wrap"><span class="text-slate-300 font-mono text-xs">Local_PII_Safe_LLM_Pipeline_OpenAI_demo.json</span><button onclick="copyN8nOpenAiTemplateUrl(this)" class="px-2 py-0.5 rounded bg-slate-800 hover:bg-slate-700 text-emerald-300 hover:text-white border border-emerald-500/40 text-[10px] font-mono font-semibold transition-all inline-flex items-center gap-1 cursor-pointer"><svg class="w-3 h-3 text-emerald-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span>Copy Import URL</span></button></span>',
+                    '<span class="text-purple-300 font-semibold text-[11px] pt-1 block">&bull; Option B (Offline Evaluation Pipeline - No LLM Key):</span>',
+                    '<span class="inline-flex items-center gap-2.5 pl-3 py-0.5 flex-wrap"><span class="text-slate-300 font-mono text-xs">Local_PII_Safe_LLM_Pipeline.json</span><button onclick="copyN8nTemplateUrl(this)" class="px-2 py-0.5 rounded bg-slate-800 hover:bg-slate-700 text-purple-300 hover:text-white border border-purple-500/40 text-[10px] font-mono font-semibold transition-all inline-flex items-center gap-1 cursor-pointer"><svg class="w-3 h-3 text-purple-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span>Copy Import URL</span></button></span>',
                     '',
                     '<span class="text-emerald-400 font-semibold italic text-[11px]">&#x2714; Full Step-by-Step Visual Setup Guide: </span><a href="/docs/n8n.html" class="text-cyan-300 underline font-bold hover:text-cyan-200">Open /docs/n8n.html &rarr;</a>'
                 ]
@@ -3298,10 +3401,16 @@ https://raw.githubusercontent.com/piiguardrails/piiguardrails/main/workflows/Loc
             document.getElementById('deploy-code-container').innerHTML = renderCodeLines(data.lines);
 
             const tabs = document.querySelectorAll('.deploy-tab');
-            const keys = ['pip', 'uv', 'docker'];
+            const keys = ['pip', 'uv', 'docker', 'aws', 'azure'];
             tabs.forEach((t, i) => {
                 if (keys[i] === tabKey) {
-                    t.className = 'deploy-tab px-3.5 py-1.5 rounded-xl bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 text-xs font-semibold transition-all inline-flex items-center gap-2';
+                    if (tabKey === 'aws') {
+                        t.className = 'deploy-tab px-3.5 py-1.5 rounded-xl bg-amber-500/20 text-amber-300 border border-amber-500/40 text-xs font-semibold transition-all inline-flex items-center gap-2';
+                    } else if (tabKey === 'azure') {
+                        t.className = 'deploy-tab px-3.5 py-1.5 rounded-xl bg-blue-500/20 text-blue-300 border border-blue-500/40 text-xs font-semibold transition-all inline-flex items-center gap-2';
+                    } else {
+                        t.className = 'deploy-tab px-3.5 py-1.5 rounded-xl bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 text-xs font-semibold transition-all inline-flex items-center gap-2';
+                    }
                 } else {
                     t.className = 'deploy-tab px-3.5 py-1.5 rounded-xl bg-slate-900 text-slate-400 border border-slate-800 hover:text-white text-xs font-semibold transition-all inline-flex items-center gap-2';
                 }
@@ -3459,14 +3568,49 @@ https://raw.githubusercontent.com/piiguardrails/piiguardrails/main/workflows/Loc
             });
         }
 
-        function copyN8nTemplateUrl() {
+        function copyN8nTemplateUrl(btnEl) {
             navigator.clipboard.writeText('https://raw.githubusercontent.com/piiguardrails/piiguardrails/main/workflows/Local_PII_Safe_LLM_Pipeline.json').then(() => {
                 const btn = document.getElementById('n8n-template-copy-text');
                 if (btn) {
                     btn.innerText = 'Copied URL!';
                     setTimeout(() => { btn.innerText = 'Copy URL'; }, 2000);
                 }
+                if (btnEl) {
+                    const orig = btnEl.innerHTML;
+                    btnEl.innerHTML = '<span class="text-emerald-300 font-bold">✓ Copied URL!</span>';
+                    setTimeout(() => { btnEl.innerHTML = orig; }, 2000);
+                }
             });
+        }
+
+        function copyN8nOpenAiTemplateUrl(btnEl) {
+            navigator.clipboard.writeText('https://raw.githubusercontent.com/piiguardrails/piiguardrails/main/workflows/Local_PII_Safe_LLM_Pipeline_OpenAI_demo.json').then(() => {
+                const btn = document.getElementById('n8n-openai-template-copy-text');
+                if (btn) {
+                    btn.innerText = 'Copied URL!';
+                    setTimeout(() => { btn.innerText = 'Copy URL'; }, 2000);
+                }
+                if (btnEl) {
+                    const orig = btnEl.innerHTML;
+                    btnEl.innerHTML = '<span class="text-emerald-300 font-bold">✓ Copied URL!</span>';
+                    setTimeout(() => { btnEl.innerHTML = orig; }, 2000);
+                }
+            });
+        }
+
+        function copyArmTemplateJson(btnEl) {
+            fetch('/azure/azuredeploy.json')
+                .then(r => r.text())
+                .then(text => {
+                    navigator.clipboard.writeText(text).then(() => {
+                        if (btnEl) {
+                            const orig = btnEl.innerHTML;
+                            btnEl.innerHTML = '<span class="text-emerald-300 font-bold">✓ Copied JSON!</span>';
+                            setTimeout(() => { btnEl.innerHTML = orig; }, 2000);
+                        }
+                    });
+                })
+                .catch(err => console.error('Failed to copy ARM template', err));
         }
 
         // =========================================================================
