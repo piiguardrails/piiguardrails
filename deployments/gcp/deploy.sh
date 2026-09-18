@@ -143,11 +143,37 @@ echo -e "Studio Web UI:       ${CYAN}http://${EXTERNAL_IP}:8000${NC}"
 echo -e "OpenAPI Specs:       ${CYAN}http://${EXTERNAL_IP}:8000/docs${NC}"
 echo -e "Default Username:    ${CYAN}admin${NC}"
 echo -e "Password:            ${CYAN}${ADMIN_PASSWORD}${NC}"
+echo -e "License Included:    ${GREEN}10,000 requests evaluation license active${NC}"
 echo ""
-echo -e "${YELLOW}Note: The instance is currently executing the startup script to install${NC}"
-echo -e "${YELLOW}Docker and initialize the database. The Web UI will be fully accessible${NC}"
-echo -e "${YELLOW}in approximately 2 to 3 minutes.${NC}"
+echo -e "${YELLOW}Waiting for Web Studio to finish startup (~90-120 seconds)...${NC}"
+READY=false
+for i in $(seq 1 40); do
+    if curl -s -f -m 3 "http://${EXTERNAL_IP}:8000/health" >/dev/null 2>&1; then
+        READY=true
+        break
+    fi
+    printf "${CYAN}.${NC}"
+    sleep 5
+done
 echo ""
-echo -e "To tail live setup progress, run:"
-echo -e "  ${CYAN}gcloud compute instances tail-serial-port-output ${INSTANCE_NAME} --zone=${ZONE}${NC}"
-echo ""
+
+if [ "$READY" = "true" ]; then
+    echo ""
+    echo -e "${GREEN}==================================================================${NC}"
+    echo -e "${GREEN}   Enterprise PII Guardrails is LIVE and Ready for Access!        ${NC}"
+    echo -e "${GREEN}==================================================================${NC}"
+    echo ""
+    echo -e "  Direct Web Studio: ${CYAN}http://${EXTERNAL_IP}:8000${NC}"
+    echo -e "  Interactive Specs: ${CYAN}http://${EXTERNAL_IP}:8000/docs${NC}"
+    echo -e "  Username:          ${CYAN}admin${NC}"
+    echo -e "  Password:          ${CYAN}${ADMIN_PASSWORD}${NC}"
+    echo ""
+    echo -e "${GREEN}==================================================================${NC}"
+else
+    echo ""
+    echo -e "${YELLOW}Notice: Instance is still completing initial setup in the background.${NC}"
+    echo -e "Your application will be live shortly at: ${CYAN}http://${EXTERNAL_IP}:8000${NC}"
+    echo -e "To view your live instance IP anytime, run:"
+    echo -e "  ${CYAN}gcloud compute instances list${NC}"
+    echo ""
+fi
