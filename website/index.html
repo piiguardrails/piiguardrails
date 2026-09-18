@@ -346,6 +346,12 @@
                     </svg>
                     <span>1-Click Azure Deploy</span>
                 </a>
+                <a href="/docs/gcp-gce.html" class="w-full sm:w-auto px-5 py-3.5 rounded-xl bg-sky-950/40 hover:bg-sky-900/60 border border-sky-500/40 hover:border-sky-400 text-sky-300 hover:text-white font-semibold text-xs sm:text-sm transition-all flex items-center justify-center space-x-2 group">
+                    <svg class="w-4 h-4 text-sky-400 group-hover:scale-110 transition-transform shrink-0" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM19 18H6c-2.21 0-4-1.79-4-4 0-2.05 1.53-3.76 3.56-3.97l1.07-.11.5-.95C8.08 7.14 9.94 6 12 6c2.62 0 4.88 1.86 5.39 4.43l.3 1.5 1.53.11c1.56.1 2.78 1.41 2.78 2.96 0 1.65-1.35 3-3 3z"/>
+                    </svg>
+                    <span>1-Click GCP Deploy</span>
+                </a>
             </div>
 
             <!-- Live Metrics Bar -->
@@ -1391,6 +1397,12 @@
                             </svg>
                             <span>Azure VM (1-Click)</span>
                         </button>
+                        <button onclick="setDeployTab('gcp')" class="deploy-tab px-3.5 py-1.5 rounded-xl bg-slate-900 text-slate-400 border border-slate-800 hover:text-white text-xs font-semibold transition-all inline-flex items-center gap-2 whitespace-nowrap">
+                            <svg class="w-3.5 h-3.5 text-sky-400 shrink-0" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM19 18H6c-2.21 0-4-1.79-4-4 0-2.05 1.53-3.76 3.56-3.97l1.07-.11.5-.95C8.08 7.14 9.94 6 12 6c2.62 0 4.88 1.86 5.39 4.43l.3 1.5 1.53.11c1.56.1 2.78 1.41 2.78 2.96 0 1.65-1.35 3-3 3z"/>
+                            </svg>
+                            <span>Google Cloud (1-Click)</span>
+                        </button>
                     </div>
                 </div>
 
@@ -2279,6 +2291,7 @@
                         <li><a href="https://www.npmjs.com/package/n8n-nodes-piiguardrails" target="_blank" rel="noreferrer" class="hover:text-cyan-400 transition-colors flex items-center gap-2"><svg class="w-3.5 h-3.5 text-[#EA4B71] shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M19.34 7.66a3.84 3.84 0 0 0-3.32-1.92h-.03a3.84 3.84 0 0 0-2.6 1.02L9.2 10.38a1.92 1.92 0 0 1-1.32.52H6.5a1.92 1.92 0 1 1 0-3.84h1.38c.51 0 .99-.2 1.35-.57l1.1-1.1A3.84 3.84 0 0 0 7.62 3.5H6.5a5.76 5.76 0 1 0 0 11.52h1.38c.5 0 .99-.2 1.32-.52l4.19-3.62a1.92 1.92 0 0 1 1.3-.52h.03a1.92 1.92 0 0 1 1.92 1.92 1.92 1.92 0 0 1-1.92 1.92h-1.38a1.92 1.92 0 0 0-1.35.57l-1.1 1.1a3.84 3.84 0 0 0 2.71 1.93h1.12a5.76 5.76 0 0 0 5.76-5.76 5.74 5.74 0 0 0-1.14-3.4z"/></svg><span>n8n Community Node (npm)</span></a></li>
                         <li><a href="/docs/aws-ec2.html" class="hover:text-amber-400 transition-colors flex items-center gap-2"><svg class="w-3.5 h-3.5 text-amber-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/></svg><span>AWS EC2 1-Click Guide</span></a></li>
                         <li><a href="/docs/azure-vm.html" class="hover:text-blue-400 transition-colors flex items-center gap-2"><svg class="w-3.5 h-3.5 text-blue-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg><span>Azure VM 1-Click Guide</span></a></li>
+                        <li><a href="/docs/gcp-gce.html" class="hover:text-sky-400 transition-colors flex items-center gap-2"><svg class="w-3.5 h-3.5 text-sky-400 shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM19 18H6c-2.21 0-4-1.79-4-4 0-2.05 1.53-3.76 3.56-3.97l1.07-.11.5-.95C8.08 7.14 9.94 6 12 6c2.62 0 4.88 1.86 5.39 4.43l.3 1.5 1.53.11c1.56.1 2.78 1.41 2.78 2.96 0 1.65-1.35 3-3 3z"/></svg><span>Google Cloud GCE 1-Click Guide</span></a></li>
                         <li><a href="/docs/n8n.html" class="hover:text-cyan-400 transition-colors flex items-center gap-2"><svg class="w-3.5 h-3.5 text-cyan-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg><span>n8n Integration Guide</span></a></li>
                         <li><a href="https://raw.githubusercontent.com/piiguardrails/piiguardrails/main/workflows/Local_PII_Safe_LLM_Pipeline_OpenAI_demo.json" download="Local_PII_Safe_LLM_Pipeline_OpenAI_demo.json" target="_blank" rel="noreferrer" class="hover:text-cyan-400 transition-colors flex items-center gap-2"><svg class="w-3.5 h-3.5 text-emerald-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg><span>n8n OpenAI Demo Workflow (JSON)</span></a></li>
                         <li><a href="https://raw.githubusercontent.com/piiguardrails/piiguardrails/main/workflows/Local_PII_Safe_LLM_Pipeline.json" download="Local_PII_Safe_LLM_Pipeline.json" target="_blank" rel="noreferrer" class="hover:text-cyan-400 transition-colors flex items-center gap-2"><svg class="w-3.5 h-3.5 text-purple-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg><span>n8n Offline Workflow (JSON)</span></a></li>
@@ -2817,6 +2830,39 @@ https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.github
                     '',
                     '<span class="text-slate-500 italic"># 3. Locate Server Hardware ID in Licensing Tab for in-place Node-Locked production upgrade</span>',
                     '<span class="text-emerald-400 font-semibold italic text-[11px]">&#x2714; Full Step-by-Step Azure Guide: </span><a href="/docs/azure-vm.html" class="text-cyan-300 underline font-bold hover:text-cyan-200">Open /docs/azure-vm.html &rarr;</a>'
+                ]
+            },
+            gcp: {
+                tabName: 'google cloud gce - 1-click & gcloud quickstart',
+                lang: 'GOOGLE CLOUD / GCE',
+                raw: `# 1-Click Google Cloud GCE Deployment (10,000 Evaluation Requests Included)
+gcloud compute instances create piiguardrail-gce \\
+  --zone=us-central1-a \\
+  --machine-type=e2-standard-2 \\
+  --image-family=ubuntu-2404-lts-amd64 \\
+  --image-project=ubuntu-os-cloud \\
+  --boot-disk-size=30GB \\
+  --boot-disk-type=pd-balanced \\
+  --tags=http-server,piiguardrails \\
+  --metadata=company_name="GCP Demo",gui_password="YourAdminPassword123!" \\
+  --metadata-from-file=startup-script=<(curl -sSL https://piiguardrails.com/gcp/startup-script.sh)`,
+                lines: [
+                    '<span class="text-slate-500 italic"># 1-Click Google Cloud GCE Deployment (10,000 Evaluation Requests Included)</span>',
+                    '<span class="text-sky-400 font-semibold">// 1. CHOOSE YOUR LAUNCH METHOD:</span>',
+                    '<span class="inline-flex items-center gap-2 pt-1 flex-wrap"><a href="https://ssh.cloud.google.com/cloudshell/editor?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fpiiguardrails%2Fpiiguardrails&cloudshell_workspace=deployments/gcp&cloudshell_tutorial=README.md" target="_blank" rel="noopener" class="px-3 py-1.5 rounded-lg bg-gradient-to-r from-sky-600 to-cyan-600 hover:from-sky-500 hover:to-cyan-500 text-white font-bold text-xs shadow-lg transition-all inline-flex items-center gap-1.5"><span>🚀 Launch in Cloud Shell</span><span>&rarr;</span></a><button onclick="copyGcloudCommand(this)" class="px-2.5 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-cyan-300 hover:text-white border border-slate-700 text-xs font-semibold transition-all inline-flex items-center gap-1 cursor-pointer"><svg class="w-3.5 h-3.5 text-cyan-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span>Copy gcloud Command</span></button><a href="/docs/gcp-gce.html" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-cyan-300 hover:text-white border border-slate-700 text-xs font-semibold transition-all">View Setup Guide &rarr;</a></span>',
+                    '',
+                    '<span class="text-sky-400 font-semibold">// 2. OR RUN DIRECTLY VIA GCLOUD CLI:</span>',
+                    '<span class="text-cyan-400 font-semibold">gcloud</span> <span class="text-purple-400">compute instances create</span> <span class="text-yellow-300">piiguardrail-gce</span> <span class="text-slate-500">\\</span>',
+                    '  <span class="text-amber-300">--zone</span><span class="text-slate-400">=</span><span class="text-emerald-300">us-central1-a</span> <span class="text-amber-300">--machine-type</span><span class="text-slate-400">=</span><span class="text-emerald-300">e2-standard-2</span> <span class="text-slate-500">\\</span>',
+                    '  <span class="text-amber-300">--image-family</span><span class="text-slate-400">=</span><span class="text-emerald-300">ubuntu-2404-lts-amd64</span> <span class="text-amber-300">--image-project</span><span class="text-slate-400">=</span><span class="text-emerald-300">ubuntu-os-cloud</span> <span class="text-slate-500">\\</span>',
+                    '  <span class="text-amber-300">--boot-disk-size</span><span class="text-slate-400">=</span><span class="text-emerald-300">30GB</span> <span class="text-amber-300">--tags</span><span class="text-slate-400">=</span><span class="text-emerald-300">http-server,piiguardrails</span> <span class="text-slate-500">\\</span>',
+                    '  <span class="text-amber-300">--metadata-from-file</span><span class="text-slate-400">=</span><span class="text-sky-300">startup-script</span><span class="text-slate-400">=</span><span class="text-emerald-300">&lt;(curl -sSL https://piiguardrails.com/gcp/startup-script.sh)</span>',
+                    '',
+                    '<span class="text-slate-500 italic"># 3. Access Studio Web UI once instance status shows RUNNING (~2-3 mins)</span>',
+                    '<span class="text-slate-300">URL: </span><span class="text-cyan-400 font-mono">http://&lt;GCP_EXTERNAL_IP&gt;:8000</span> <span class="text-slate-500">(user: admin)</span>',
+                    '',
+                    '<span class="text-slate-500 italic"># 4. Locate Server Hardware ID in Licensing Tab for in-place Node-Locked production upgrade</span>',
+                    '<span class="text-emerald-400 font-semibold italic text-[11px]">&#x2714; Full Step-by-Step GCP Guide: </span><a href="/docs/gcp-gce.html" class="text-cyan-300 underline font-bold hover:text-cyan-200">Open /docs/gcp-gce.html &rarr;</a>'
                 ]
             }
         };
@@ -3401,13 +3447,15 @@ https://raw.githubusercontent.com/piiguardrails/piiguardrails/main/workflows/Loc
             document.getElementById('deploy-code-container').innerHTML = renderCodeLines(data.lines);
 
             const tabs = document.querySelectorAll('.deploy-tab');
-            const keys = ['pip', 'uv', 'docker', 'aws', 'azure'];
+            const keys = ['pip', 'uv', 'docker', 'aws', 'azure', 'gcp'];
             tabs.forEach((t, i) => {
                 if (keys[i] === tabKey) {
                     if (tabKey === 'aws') {
                         t.className = 'deploy-tab px-3.5 py-1.5 rounded-xl bg-amber-500/20 text-amber-300 border border-amber-500/40 text-xs font-semibold transition-all inline-flex items-center gap-2';
                     } else if (tabKey === 'azure') {
                         t.className = 'deploy-tab px-3.5 py-1.5 rounded-xl bg-blue-500/20 text-blue-300 border border-blue-500/40 text-xs font-semibold transition-all inline-flex items-center gap-2';
+                    } else if (tabKey === 'gcp') {
+                        t.className = 'deploy-tab px-3.5 py-1.5 rounded-xl bg-sky-500/20 text-sky-300 border border-sky-500/40 text-xs font-semibold transition-all inline-flex items-center gap-2';
                     } else {
                         t.className = 'deploy-tab px-3.5 py-1.5 rounded-xl bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 text-xs font-semibold transition-all inline-flex items-center gap-2';
                     }
@@ -3611,6 +3659,26 @@ https://raw.githubusercontent.com/piiguardrails/piiguardrails/main/workflows/Loc
                     });
                 })
                 .catch(err => console.error('Failed to copy ARM template', err));
+        }
+
+        function copyGcloudCommand(btnEl) {
+            const cmd = `gcloud compute instances create piiguardrail-gce \\
+  --zone=us-central1-a \\
+  --machine-type=e2-standard-2 \\
+  --image-family=ubuntu-2404-lts-amd64 \\
+  --image-project=ubuntu-os-cloud \\
+  --boot-disk-size=30GB \\
+  --boot-disk-type=pd-balanced \\
+  --tags=http-server,piiguardrails \\
+  --metadata=company_name="GCP Demo",gui_password="YourAdminPassword123!" \\
+  --metadata-from-file=startup-script=<(curl -sSL https://piiguardrails.com/gcp/startup-script.sh)`;
+            navigator.clipboard.writeText(cmd).then(() => {
+                if (btnEl) {
+                    const orig = btnEl.innerHTML;
+                    btnEl.innerHTML = '<span class="text-emerald-300 font-bold">✓ Copied Command!</span>';
+                    setTimeout(() => { btnEl.innerHTML = orig; }, 2000);
+                }
+            }).catch(err => console.error('Failed to copy gcloud command', err));
         }
 
         // =========================================================================
