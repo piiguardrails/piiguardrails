@@ -36,7 +36,8 @@ if [ -z "$GUI_PASSWORD" ]; then
 fi
 COMPANY_NAME=$(get_metadata "company_name" "GCP Demo")
 BRAND_LOGO=$(get_metadata "brand_logo" "")
-LICENSE_KEY=$(get_metadata "license_key" "")
+DEFAULT_TRIAL_KEY="ED4-AQAGWNU7FAAAAJYQ-AAAAAAAAAAAAAKFI-VXRAU4YPAHXPW6JD-CRJIDR5NFJ4ITZA2-ICFCAEEV7OYVNWO7-JDSSZ5RMIUNDHULQ-DMZPYP4ICOFTJF53-AMKICAI6R57R4XM4-QYR4UGEQ4ZTP3DAM"
+LICENSE_KEY=$(get_metadata "license_key" "$DEFAULT_TRIAL_KEY")
 APP_PORT=$(get_metadata "app_port" "8000")
 
 # 2. Update apt repository cache & install system dependencies
