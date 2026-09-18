@@ -11,7 +11,7 @@ Deploy **Enterprise PII Guardrails** into your Microsoft Azure subscription in u
 This Azure Resource Manager (ARM) template automatically provisions:
 1. **Azure Compute VM**: Canonical Ubuntu 24.04 LTS (`Standard_D2s_v7` default, 2 vCPU, 8GB RAM) optimized for ultra-low latency PII masking, NER tokenization, and custom regex profiling. Supported across all Azure availability zones with guaranteed compute capacity.
 2. **Encrypted Persistent Storage**: 30 GB Premium SSD managed OS disk mounting `/opt/piiguardrails/data` to preserve your encrypted SQLCipher audit databases and token vaults across VM restarts or deallocations.
-3. **Hardened Container Runtime**: Runs the official production container (`piiguardrails/piiguardrails:latest`) under `systemd` supervisor management with auto-restart on crash or reboot.
+3. **Hardened Container Runtime**: Runs the official production container (`piiguardrails/enterprise-pii-guardrail:latest`) under `systemd` supervisor management with auto-restart on crash or reboot.
 4. **Preconfigured Evaluation License**: Includes an immediate free evaluation license (10,000 requests quota) so your team can test APIs, LangChain, n8n workflows, and Studio Web UI with zero delays.
 5. **Network Security Group (NSG)**: Ingress strictly restricted to Port 8000 (FastAPI engine & Studio Web UI) and Port 22 (SSH) from your designated CIDR range.
 
