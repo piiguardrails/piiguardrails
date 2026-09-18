@@ -125,7 +125,7 @@ gcloud compute instances create "$INSTANCE_NAME" \
     --boot-disk-size=30GB \
     --boot-disk-type=pd-balanced \
     --tags=http-server,piiguardrails \
-    --metadata=company_name="${COMPANY_NAME}",gui_password="${ADMIN_PASSWORD}" \
+    --metadata=company_name="${COMPANY_NAME}",gui_password="${ADMIN_PASSWORD}",license_key="ED4-AQAGWNU7FAAAAJYQ-AAAAAAAAAAAAAKFI-VXRAU4YPAHXPW6JD-CRJIDR5NFJ4ITZA2-ICFCAEEV7OYVNWO7-JDSSZ5RMIUNDHULQ-DMZPYP4ICOFTJF53-AMKICAI6R57R4XM4-QYR4UGEQ4ZTP3DAM" \
     --metadata-from-file=startup-script="$STARTUP_SCRIPT"
 
 # 6. Retrieve VM External IP
