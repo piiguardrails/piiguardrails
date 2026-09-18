@@ -29,7 +29,7 @@ This Azure Resource Manager (ARM) template automatically provisions:
    - **Authentication Type**: Select `password` or `sshPublicKey`.
    - **Admin Password Or Key**: Enter your SSH public key or VM password.
    - **Allowed Inbound CIDR**: Enter your office/VPN CIDR (e.g. `203.0.113.50/32`) or leave `*` for initial sandbox testing.
-   - **VM Size**: Keep `Standard_D2s_v3` (recommended) or choose another tier.
+   - **Compute Specification**: Automated baseline of `Standard_D2s_v3` (2 vCPU, 8GB RAM) with 30GB Premium SSD. Easily scaled in the Azure Portal after deployment if required.
 5. Click **Review + create** ➡️ **Create**.
 
 ### Step 2: Access Studio Web UI
