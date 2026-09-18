@@ -90,12 +90,17 @@ echo -e "Company Name: ${GREEN}${COMPANY_NAME}${NC}"
 echo -e "${CYAN}--------------------------${NC}"
 echo ""
 
-# 4. Check / create firewall rule for port 8000
+# 4. Ensure Compute Engine API is enabled
+echo -e "Ensuring Compute Engine API (${CYAN}compute.googleapis.com${NC}) is enabled..."
+gcloud services enable compute.googleapis.com --quiet
+
+# 5. Check / create firewall rule for port 8000
 FIREWALL_RULE="allow-piiguardrails-8000"
 echo -e "Checking firewall rule ${CYAN}${FIREWALL_RULE}${NC}..."
-if ! gcloud compute firewall-rules describe "$FIREWALL_RULE" >/dev/null 2>&1; then
+if ! gcloud compute firewall-rules describe "$FIREWALL_RULE" --quiet >/dev/null 2>&1; then
     echo -e "Creating firewall rule ${GREEN}${FIREWALL_RULE}${NC} for port 8000..."
     gcloud compute firewall-rules create "$FIREWALL_RULE" \
+        --quiet \
         --direction=INGRESS \
         --priority=1000 \
         --network=default \
@@ -112,6 +117,7 @@ fi
 echo ""
 echo -e "${CYAN}Launching Compute Engine VM '${INSTANCE_NAME}'...${NC}"
 gcloud compute instances create "$INSTANCE_NAME" \
+    --quiet \
     --zone="$ZONE" \
     --machine-type="$MACHINE_TYPE" \
     --image-family=ubuntu-2404-lts-amd64 \
