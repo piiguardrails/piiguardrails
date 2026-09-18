@@ -219,14 +219,14 @@ docker run -d \
   -e ACCEPT_LICENSE=true \
   -v pii_data:/app/data \
   --restart unless-stopped \
-  piiguardrails/piiguardrails:latest
+  piiguardrails/enterprise-pii-guardrail:latest
 ```
 
 ### Docker Compose
 ```yaml
 services:
   pii-guardrails:
-    image: piiguardrails/piiguardrails:latest
+    image: piiguardrails/enterprise-pii-guardrail:latest
     container_name: pii-guardrails
     restart: unless-stopped
     ports:
