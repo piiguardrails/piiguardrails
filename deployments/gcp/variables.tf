@@ -41,9 +41,8 @@ variable "network" {
 
 variable "admin_password" {
   type        = string
-  default     = "Admin@12345"
   sensitive   = true
-  description = "Master password for the Studio Web UI (username: admin)."
+  description = "Master password for the Studio Web UI (username: admin, min 8 characters)."
 }
 
 variable "company_name" {
