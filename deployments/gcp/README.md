@@ -47,7 +47,7 @@ gcloud compute instances create piiguardrail-gce \
   --boot-disk-size=30GB \
   --boot-disk-type=pd-balanced \
   --tags=http-server,piiguardrails \
-  --metadata=company_name="GCP Demo",gui_password="YourAdminPassword123!" \
+  --metadata=company_name="GCP Demo",gui_password="<YOUR_SECURE_PASSWORD>" \
   --metadata-from-file=startup-script=<(curl -sSL https://raw.githubusercontent.com/piiguardrails/piiguardrails/main/deployments/gcp/startup-script.sh)
 ```
 
