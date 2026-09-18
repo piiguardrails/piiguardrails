@@ -75,6 +75,20 @@
       "metadata": {
         "description": "Azure region for the VM and network resources. East US 2 is recommended for guaranteed compute capacity."
       }
+    },
+    "companyName": {
+      "type": "string",
+      "defaultValue": "Azure Demo",
+      "metadata": {
+        "description": "Company or organization name for white-labeling the Web Studio and Reports (Default: 'Azure Demo')."
+      }
+    },
+    "brandLogoURL": {
+      "type": "string",
+      "defaultValue": "/ui/logo.png",
+      "metadata": {
+        "description": "HTTPS URL or local path to company logo image (Default: '/ui/logo.png')."
+      }
     }
   },
   "variables": {
@@ -247,7 +261,7 @@
           "computerName": "[parameters('vmName')]",
           "adminUsername": "[parameters('adminUsername')]",
           "adminPassword": "[if(equals(parameters('authenticationType'), 'password'), parameters('adminPasswordOrKey'), json('null'))]",
-          "customData": "[base64(concat('#!/bin/bash\nset -e\nexec >> /var/log/customdata.log 2>&1\n\necho \"==========================================================\"\necho \"Initializing Enterprise PII Guardrails 1-Click Environment\"\necho \"==========================================================\"\n\nexport DEBIAN_FRONTEND=noninteractive\napt-get update -y\napt-get install -y docker.io curl openssl\nsystemctl enable --now docker\n\nmkdir -p /opt/piiguardrails/data\nchmod 777 /opt/piiguardrails/data\n\nRANDOM_PASSPHRASE=$(openssl rand -hex 16)\n\ncat <<EOF > /etc/piiguardrails.env\nACCEPT_LICENSE=true\nGUI_PASSWORD=', parameters('adminStudioPassword'), '\nSQLCIPHER_PASSPHRASE=$RANDOM_PASSPHRASE\nPRECONFIGURED_LICENSE_KEY=', parameters('trialLicenseKey'), '\nPORT=8000\nAPP_PORT=8000\nAPP_HOST=0.0.0.0\nDATA_DIR=/app/data\nEOF\nchmod 600 /etc/piiguardrails.env\n\ncat <<EOF > /etc/systemd/system/piiguardrail.service\n[Unit]\nDescription=Enterprise PII Guardrails Engine\nAfter=docker.service\nRequires=docker.service\n\n[Service]\nTimeoutStartSec=0\nRestart=always\nRestartSec=10\nExecStartPre=-/usr/bin/docker stop pii-guardrail-app\nExecStartPre=-/usr/bin/docker rm pii-guardrail-app\nExecStartPre=/usr/bin/docker pull piiguardrails/enterprise-pii-guardrail:latest\nExecStart=/usr/bin/docker run --name pii-guardrail-app -p 8000:8000 -v /opt/piiguardrails/data:/app/data --env-file /etc/piiguardrails.env piiguardrails/enterprise-pii-guardrail:latest\nExecStop=/usr/bin/docker stop pii-guardrail-app\n\n[Install]\nWantedBy=multi-user.target\nEOF\n\nsystemctl daemon-reload\nsystemctl enable --now piiguardrail.service\n\necho \"==========================================================\"\necho \"Enterprise PII Guardrails container launched successfully!\"\necho \"==========================================================\"\n'))]"
+          "customData": "[base64(concat('#!/bin/bash\nset -e\nexec >> /var/log/customdata.log 2>&1\n\necho \"==========================================================\"\necho \"Initializing Enterprise PII Guardrails 1-Click Environment\"\necho \"==========================================================\"\n\nexport DEBIAN_FRONTEND=noninteractive\napt-get update -y\napt-get install -y docker.io curl openssl\nsystemctl enable --now docker\n\nmkdir -p /opt/piiguardrails/data\nchmod 777 /opt/piiguardrails/data\n\nRANDOM_PASSPHRASE=$(openssl rand -hex 16)\n\ncat <<EOF > /etc/piiguardrails.env\nACCEPT_LICENSE=true\nGUI_PASSWORD=', parameters('adminStudioPassword'), '\nSQLCIPHER_PASSPHRASE=$RANDOM_PASSPHRASE\nPRECONFIGURED_LICENSE_KEY=', parameters('trialLicenseKey'), '\nCOMPANY_NAME=', parameters('companyName'), '\nBRAND_LOGO=', parameters('brandLogoURL'), '\nPORT=8000\nAPP_PORT=8000\nAPP_HOST=0.0.0.0\nDATA_DIR=/app/data\nEOF\nchmod 600 /etc/piiguardrails.env\n\ncat <<EOF > /etc/systemd/system/piiguardrail.service\n[Unit]\nDescription=Enterprise PII Guardrails Engine\nAfter=docker.service\nRequires=docker.service\n\n[Service]\nTimeoutStartSec=0\nRestart=always\nRestartSec=10\nExecStartPre=-/usr/bin/docker stop pii-guardrail-app\nExecStartPre=-/usr/bin/docker rm pii-guardrail-app\nExecStartPre=/usr/bin/docker pull piiguardrails/enterprise-pii-guardrail:latest\nExecStart=/usr/bin/docker run --name pii-guardrail-app -p 8000:8000 -v /opt/piiguardrails/data:/app/data --env-file /etc/piiguardrails.env piiguardrails/enterprise-pii-guardrail:latest\nExecStop=/usr/bin/docker stop pii-guardrail-app\n\n[Install]\nWantedBy=multi-user.target\nEOF\n\nsystemctl daemon-reload\nsystemctl enable --now piiguardrail.service\n\necho \"==========================================================\"\necho \"Enterprise PII Guardrails container launched successfully!\"\necho \"==========================================================\"\n'))]"
         }
       },
       "tags": {
