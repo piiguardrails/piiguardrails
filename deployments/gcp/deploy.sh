@@ -45,9 +45,22 @@ fi
 echo -e "Target GCP Project: ${GREEN}${CURRENT_PROJECT}${NC}"
 echo ""
 
-# 3. Prompt user configurations with enterprise defaults
-read -rp "Enter Admin Studio Password (min 8 chars, default: Admin@12345): " ADMIN_PASS_INPUT
-ADMIN_PASSWORD=${ADMIN_PASS_INPUT:-Admin@12345}
+# 3. Prompt user configurations (Mandatory password with zero default)
+while true; do
+    read -s -rp "Enter Admin Studio Password (min 8 chars, mandatory): " ADMIN_PASSWORD
+    echo ""
+    if [ ${#ADMIN_PASSWORD} -lt 8 ]; then
+        echo -e "${RED}Error: Password must be at least 8 characters long.${NC}"
+        continue
+    fi
+    read -s -rp "Confirm Admin Studio Password: " ADMIN_PASS_CONFIRM
+    echo ""
+    if [ "$ADMIN_PASSWORD" != "$ADMIN_PASS_CONFIRM" ]; then
+        echo -e "${RED}Error: Passwords do not match. Please try again.${NC}"
+        continue
+    fi
+    break
+done
 
 read -rp "Enter Company / Organization Name (default: GCP Demo): " COMPANY_INPUT
 COMPANY_NAME=${COMPANY_INPUT:-GCP Demo}
