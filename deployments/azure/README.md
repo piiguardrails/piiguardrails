@@ -9,7 +9,7 @@ Deploy **Enterprise PII Guardrails** into your Microsoft Azure subscription in u
 ## Overview
 
 This Azure Resource Manager (ARM) template automatically provisions:
-1. **Azure Compute VM**: Canonical Ubuntu 24.04 LTS (`Standard_B2s` default, 2 vCPU, 4GB RAM) optimized for ultra-low latency PII masking, NER tokenization, and custom regex profiling. Supported in all Azure regions with zero quota restrictions.
+1. **Azure Compute VM**: Canonical Ubuntu 24.04 LTS (`Standard_D2s_v7` default, 2 vCPU, 8GB RAM) optimized for ultra-low latency PII masking, NER tokenization, and custom regex profiling. Supported across all Azure availability zones with guaranteed compute capacity.
 2. **Encrypted Persistent Storage**: 30 GB Premium SSD managed OS disk mounting `/opt/piiguardrails/data` to preserve your encrypted SQLCipher audit databases and token vaults across VM restarts or deallocations.
 3. **Hardened Container Runtime**: Runs the official production container (`piiguardrails/piiguardrails:latest`) under `systemd` supervisor management with auto-restart on crash or reboot.
 4. **Preconfigured Evaluation License**: Includes an immediate free evaluation license (10,000 requests quota) so your team can test APIs, LangChain, n8n workflows, and Studio Web UI with zero delays.
@@ -22,14 +22,14 @@ This Azure Resource Manager (ARM) template automatically provisions:
 ### Step 1: Deploy Template in Azure Portal
 1. Click the **[Deploy to Azure](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fpiiguardrails%2Fpiiguardrails%2Fmain%2Fdeployments%2Fazure%2Fazuredeploy.json)** button above.
 2. Select your Azure **Subscription** and choose or create a **Resource Group** (e.g. `rg-piiguardrails`).
-3. Select your preferred Azure **Region** (e.g. `East US`, `West Europe`, `Central India`).
+3. Select your preferred Azure **Region** (recommended: `East US 2`).
 4. Fill in the template parameters:
    - **Admin Studio Password**: Choose a secure administrative password (min 8 chars) to log into the Studio Web UI (username: `admin`).
    - **Admin Username**: Default is `azureuser`.
    - **Authentication Type**: Select `password` or `sshPublicKey`.
    - **Admin Password Or Key**: Enter your SSH public key or VM password.
    - **Allowed Inbound CIDR**: Enter your office/VPN CIDR (e.g. `203.0.113.50/32`) or leave `*` for initial sandbox testing.
-   - **Compute Specification**: Automated baseline of `Standard_B2s` (2 vCPU, 4GB RAM) with 30GB Premium SSD. Broadly available across all regions (including East US) and easily scaled up in the Azure Portal after deployment if required.
+   - **Compute Specification**: Automated baseline of `Standard_D2s_v7` (2 vCPU, 8GB RAM) with 30GB Premium SSD. Broadly available across all zones and easily scaled up in the Azure Portal after deployment if required.
 5. Click **Review + create** ➡️ **Create**.
 
 ### Step 2: Access Studio Web UI
