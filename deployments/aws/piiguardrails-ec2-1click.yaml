@@ -31,16 +31,19 @@ Metadata:
 Parameters:
   InstanceType:
     Type: String
-    Default: t3.medium
+    Default: t3.micro
     AllowedValues:
+      - t3.micro
+      - t2.micro
+      - t3.small
       - t3.medium
       - t3.large
       - t3.xlarge
       - c6i.large
       - m6i.large
     Description: >
-      EC2 Instance Type. We recommend t3.medium (2 vCPU, 4GB RAM) as the baseline for
-      fast, low-latency PII detection, regex profiling, and reversible tokenization.
+      EC2 Instance Type. Select 't3.micro' or 't2.micro' for AWS Free Tier (100% free of charge).
+      Select 't3.medium' (2 vCPU, 4GB RAM) or larger for high-throughput enterprise production.
 
   AdminPassword:
     Type: String
@@ -145,6 +148,15 @@ Resources:
           echo "=========================================================="
           echo "Initializing Enterprise PII Guardrails 1-Click Environment"
           echo "=========================================================="
+
+          # 0. Configure 2GB swap space to guarantee smooth performance on Free Tier micro instances
+          if [ ! -f /swapfile ]; then
+              fallocate -l 2G /swapfile || dd if=/dev/zero of=/swapfile bs=1M count=2048
+              chmod 600 /swapfile
+              mkswap /swapfile
+              swapon /swapfile
+              echo '/swapfile none swap sw 0 0' >> /etc/fstab
+          fi
 
           # 1. Update OS packages and install Docker runtime
           dnf update -y
