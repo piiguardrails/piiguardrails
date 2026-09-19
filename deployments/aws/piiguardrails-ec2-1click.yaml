@@ -103,21 +103,18 @@ Resources:
   InstanceSecurityGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
-      GroupDescription: Enable inbound traffic on Port 8000 for Enterprise PII Guardrails Web UI and API.
+      GroupDescription: Enable inbound traffic on Port 8000 and Port 22 for Enterprise PII Guardrails.
       SecurityGroupIngress:
         - IpProtocol: tcp
           FromPort: 8000
           ToPort: 8000
           CidrIp: !Ref AllowedInboundCIDR
           Description: Web Studio UI and REST API
-        - !If
-          - HasKeyPair
-          - IpProtocol: tcp
-            FromPort: 22
-            ToPort: 22
-            CidrIp: !Ref AllowedInboundCIDR
-            Description: Optional SSH access
-          - !Ref "AWS::NoValue"
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          CidrIp: !Ref AllowedInboundCIDR
+          Description: SSH and EC2 Instance Connect terminal
       Tags:
         - Key: Name
           Value: !Sub "${AWS::StackName}-SecurityGroup"
@@ -158,9 +155,9 @@ Resources:
               echo '/swapfile none swap sw 0 0' >> /etc/fstab
           fi
 
-          # 1. Update OS packages and install Docker runtime
-          dnf update -y
-          dnf install -y docker curl openssl
+          # 1. Update OS packages and install Docker runtime (curl-minimal is pre-installed on AL2023)
+          dnf update -y --allowerasing
+          dnf install -y --allowerasing docker openssl
           systemctl enable --now docker
 
           # 2. Setup persistent host directory for encrypted SQLCipher database
