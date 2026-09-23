@@ -1,10 +1,8 @@
 /**
- * Copyright (c) 2026 piiguardrails.com. All Rights Reserved.
+ * Copyright (c) 2026 piiguardrails.com
  *
- * PROPRIETARY & CONFIDENTIAL.
- * This software and its underlying architecture and schemas are protected by intellectual
- * property laws and the Enterprise Software Connector License Agreement.
- * Unauthorized copying, cloning, or distribution is strictly prohibited.
+ * Licensed under the MIT License.
+ * See LICENSE.md in the project root for license information.
  */
 import type { IAuthenticateGeneric, ICredentialTestRequest, ICredentialType, INodeProperties, Icon } from 'n8n-workflow';
 export declare class PiiGuardrailsApi implements ICredentialType {
