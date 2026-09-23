@@ -1,6 +1,6 @@
 {
   "name": "n8n-nodes-piiguardrails",
-  "version": "0.1.9",
+  "version": "0.2.0",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/piiguardrails/piiguardrails.git",
