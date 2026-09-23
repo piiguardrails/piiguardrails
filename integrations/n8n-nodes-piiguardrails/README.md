@@ -4,7 +4,7 @@
   <a href="https://www.npmjs.com/package/n8n-nodes-piiguardrails"><img src="https://img.shields.io/npm/v/n8n-nodes-piiguardrails?color=00c853&style=for-the-badge&logo=npm" alt="npm version" /></a>
   <a href="https://nodejs.org"><img src="https://img.shields.io/badge/Node.js-%3E%3D%2018.0.0-339933?style=for-the-badge&logo=node.js" alt="Node.js version" /></a>
   <a href="https://n8n.io"><img src="https://img.shields.io/badge/n8n-community--node-EA4B71.svg?style=for-the-badge&logo=n8n" alt="n8n community node" /></a>
-  <a href="LICENSE.md"><img src="https://img.shields.io/badge/License-Proprietary-7c4dff.svg?style=for-the-badge" alt="License" /></a>
+  <a href="LICENSE.md"><img src="https://img.shields.io/badge/License-MIT-339933.svg?style=for-the-badge" alt="License: MIT" /></a>
   <a href="https://piiguardrails.com"><img src="https://img.shields.io/badge/Zero--Data--Retention-Guaranteed-00e676?style=for-the-badge&logo=shield" alt="Zero Data Retention" /></a>
   <a href="https://piiguardrails.com"><img src="https://img.shields.io/badge/Compliance-HIPAA%20%7C%20GDPR%20%7C%20PCI--DSS-ff9100?style=for-the-badge" alt="Compliance Standards" /></a>
 </p>
@@ -327,8 +327,10 @@ Enterprise PII Guardrails is architected under strict Zero-Trust principles:
 
 Copyright (c) 2026 [piiguardrails.com](https://piiguardrails.com). All Rights Reserved.
 
-This software connector is proprietary and confidential. It is licensed strictly for use with authorized Enterprise PII Guardrails server instances under the terms of [LICENSE.md](LICENSE.md).
+This n8n community node package is open-source software licensed under the terms of the **[MIT License](LICENSE.md)**.
+
+*Note: Connecting to an Enterprise PII Guardrails server instance requires an active license or community key. See [https://piiguardrails.com/license](https://piiguardrails.com/license) for server licensing details.*
 
 * **Official Repository**: [https://github.com/piiguardrails/piiguardrails](https://github.com/piiguardrails/piiguardrails)
 * **Website & Documentation**: [https://piiguardrails.com](https://piiguardrails.com)
-* **Enterprise Licensing Inquiries**: [piiguardrails@gmail.com](mailto:piiguardrails@gmail.com)
+* **Support & Licensing Inquiries**: [piiguardrails@gmail.com](mailto:piiguardrails@gmail.com)
