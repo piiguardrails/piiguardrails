@@ -1,15 +1,14 @@
 "use strict";
 /**
- * Copyright (c) 2026 piiguardrails.com. All Rights Reserved.
+ * Copyright (c) 2026 piiguardrails.com
  *
- * PROPRIETARY & CONFIDENTIAL.
- * This software and its underlying architecture, protocols, and schemas are protected by
- * intellectual property laws and the Enterprise Software Connector License Agreement.
- * Unauthorized copying, cloning, or distribution is strictly prohibited.
+ * Licensed under the MIT License.
+ * See LICENSE.md in the project root for license information.
  */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.PiiGuardrails = void 0;
 const n8n_workflow_1 = require("n8n-workflow");
+const PACKAGE_VERSION = '0.2.0';
 class PiiGuardrails {
     constructor() {
         this.description = {
@@ -150,7 +149,7 @@ class PiiGuardrails {
                         url: `${baseUrl}/mask`,
                         headers: {
                             'Content-Type': 'application/json',
-                            'User-Agent': 'n8n-nodes-piiguardrails/0.1.7',
+                            'User-Agent': `n8n-nodes-piiguardrails/${PACKAGE_VERSION}`,
                         },
                         body: {
                             text,
@@ -192,7 +191,7 @@ class PiiGuardrails {
                         url: `${baseUrl}/unmask`,
                         headers: {
                             'Content-Type': 'application/json',
-                            'User-Agent': 'n8n-nodes-piiguardrails/0.1.7',
+                            'User-Agent': `n8n-nodes-piiguardrails/${PACKAGE_VERSION}`,
                         },
                         body: {
                             text: unmaskText,
@@ -221,7 +220,7 @@ class PiiGuardrails {
                         url: `${baseUrl}/mask`,
                         headers: {
                             'Content-Type': 'application/json',
-                            'User-Agent': 'n8n-nodes-piiguardrails/0.1.7',
+                            'User-Agent': `n8n-nodes-piiguardrails/${PACKAGE_VERSION}`,
                         },
                         body: {
                             text: scanText,
