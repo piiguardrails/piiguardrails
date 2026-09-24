@@ -4,7 +4,7 @@
 
 **High-Performance, Zero-Leak AI Privacy Gateway & Management Studio for Enterprise LLM Pipelines**
 
-[![PyPI Version](https://img.shields.io/badge/PyPI%20Package-v2.0.8-blue?logo=pypi&logoColor=white)](https://pypi.org/project/piiguardrails/)
+[![PyPI Version](https://img.shields.io/badge/PyPI%20Package-v2.0.9-blue?logo=pypi&logoColor=white)](https://pypi.org/project/piiguardrails/)
 [![PyPI Downloads](https://img.shields.io/pepy/dt/piiguardrails?color=blue&label=PyPI%20Downloads&logo=pypi&logoColor=white)](https://pypi.org/project/piiguardrails/)
 [![GitHub Downloads](https://img.shields.io/github/downloads/piiguardrails/piiguardrails/total?color=blue&label=GitHub%20Downloads&logo=github)](https://github.com/piiguardrails/piiguardrails)
 [![Docker Pulls](https://img.shields.io/docker/pulls/piiguardrails/enterprise-pii-guardrail?color=blue&label=Docker%20Pulls&logo=docker&logoColor=white)](https://hub.docker.com/r/piiguardrails/enterprise-pii-guardrail)
@@ -125,6 +125,9 @@ sequenceDiagram
 
 ## 🚀 Quickstart
 
+> [!NOTE]
+> **CPU Architecture Requirement**: The pre-compiled standalone engine is built for **64-bit Intel/AMD architectures (`x86_64` / `AMD64`)** on Windows and Linux. ARM64 (`aarch64`) architectures (such as NVIDIA Jetson, Raspberry Pi, and AWS Graviton) are scheduled for native standalone compilation in upcoming releases.
+
 ### Method 1: Using `pip` (Recommended)
 
 ```bash
@@ -154,19 +157,19 @@ uv run --with piiguardrails piiguardrails
 
 For restricted air-gapped environments without Python installed, download the standalone binary directly from [GitHub Releases](https://github.com/piiguardrails/piiguardrails/releases):
 
-- **Windows x64**: `EnterprisePIIGuardrail-v2.0.8-windows-x64.exe`
-  - *SHA-256*: `43f26500fe8aed2ca78bef958639aea7317ec322ac1927fd4775fc9feea3ec37`
-- **Linux x86_64**: `EnterprisePIIGuardrail-v2.0.8-linux-x86_64`
-  - *SHA-256*: `8c2c62885ecaecce1bcb458ab86aa824eee1946cfe887100dbcd01b15ffdd77a`
+- **Windows x64**: `EnterprisePIIGuardrail-v2.0.9-windows-x64.exe`
+  - *SHA-256*: `36582f5ff308a370d4f5ba6c6e9d4de74d5f80a8ece048aac2d0eab9b669c8e2`
+- **Linux x86_64**: `EnterprisePIIGuardrail-v2.0.9-linux-x86_64`
+  - *SHA-256*: `c95bade9c25355c19595ad970e868fb7b48a8e57a162c81c7ff4896af6db8f2e`
 
 Run directly:
 ```bash
 # Linux
-chmod +x EnterprisePIIGuardrail-v2.0.8-linux-x86_64
-./EnterprisePIIGuardrail-v2.0.8-linux-x86_64
+chmod +x EnterprisePIIGuardrail-v2.0.9-linux-x86_64
+./EnterprisePIIGuardrail-v2.0.9-linux-x86_64
 
 # Windows
-.\EnterprisePIIGuardrail-v2.0.8-windows-x64.exe
+.\EnterprisePIIGuardrail-v2.0.9-windows-x64.exe
 ```
 
 ---
