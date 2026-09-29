@@ -1,6 +1,6 @@
 {
   "name": "n8n-nodes-piiguardrails",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/piiguardrails/piiguardrails.git",
@@ -33,8 +33,7 @@
   "files": [
     "dist",
     "README.md",
-    "LICENSE.md",
-    "workflows"
+    "LICENSE.md"
   ],
   "n8n": {
     "n8nNodesApiVersion": 1,
