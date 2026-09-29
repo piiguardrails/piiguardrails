@@ -14,7 +14,7 @@ import type {
 } from 'n8n-workflow';
 import { NodeConnectionTypes, NodeOperationError } from 'n8n-workflow';
 
-const PACKAGE_VERSION = '0.2.0';
+const PACKAGE_VERSION = '0.2.1';
 
 export class PiiGuardrails implements INodeType {
 	description: INodeTypeDescription = {
