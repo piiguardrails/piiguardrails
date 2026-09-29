@@ -8,7 +8,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.PiiGuardrails = void 0;
 const n8n_workflow_1 = require("n8n-workflow");
-const PACKAGE_VERSION = '0.2.0';
+const PACKAGE_VERSION = '0.2.1';
 class PiiGuardrails {
     constructor() {
         this.description = {
