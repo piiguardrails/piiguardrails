@@ -141,11 +141,22 @@ Passively audits payloads for sensitive PII, compliance violations, and confiden
 {
   "has_pii": true,
   "entity_count": 3,
+  "interception_counts": {
+    "EMAIL_ADDRESS": 1,
+    "PHONE_NUMBER": 1,
+    "CREDIT_CARD_NUMBER": 1
+  },
+  "detected_entities": [
+    "EMAIL_ADDRESS",
+    "PHONE_NUMBER",
+    "CREDIT_CARD_NUMBER"
+  ],
   "findings": [
-    { "type": "EMAIL_ADDRESS", "value": "alice.smith@healthcare.corp", "start": 47, "end": 74 },
-    { "type": "PHONE_NUMBER", "value": "415-555-2671", "start": 82, "end": 94 },
-    { "type": "CREDIT_CARD_NUMBER", "value": "4111-2222-3333-4444", "start": 164, "end": 183 }
-  ]
+    { "type": "EMAIL_ADDRESS", "count": 1 },
+    { "type": "PHONE_NUMBER", "count": 1 },
+    { "type": "CREDIT_CARD_NUMBER", "count": 1 }
+  ],
+  "text": "Alice Smith (alice.smith@healthcare.corp, 415-555-2671) charged card 4111-2222-3333-4444."
 }
 ```
 
