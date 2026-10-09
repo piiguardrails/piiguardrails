@@ -8,7 +8,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.PiiGuardrails = void 0;
 const n8n_workflow_1 = require("n8n-workflow");
-const PACKAGE_VERSION = '0.2.1';
+const PACKAGE_VERSION = '0.2.2';
 class PiiGuardrails {
     constructor() {
         this.description = {
@@ -229,12 +229,18 @@ class PiiGuardrails {
                     });
                     const interceptionCounts = response.interception_counts || {};
                     const totalEntities = Object.values(interceptionCounts).reduce((acc, val) => acc + (typeof val === 'number' ? val : 0), 0);
+                    const detectedEntities = Object.keys(interceptionCounts);
+                    const findings = Object.entries(interceptionCounts).map(([type, count]) => ({
+                        type,
+                        count,
+                    }));
                     returnData.push({
                         json: {
                             has_pii: totalEntities > 0,
                             entity_count: totalEntities,
                             interception_counts: interceptionCounts,
-                            detected_entities: Object.keys(interceptionCounts),
+                            detected_entities: detectedEntities,
+                            findings,
                             text: scanText,
                         },
                         pairedItem: {
