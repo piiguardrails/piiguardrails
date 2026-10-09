@@ -14,7 +14,7 @@ import type {
 } from 'n8n-workflow';
 import { NodeConnectionTypes, NodeOperationError } from 'n8n-workflow';
 
-const PACKAGE_VERSION = '0.2.1';
+const PACKAGE_VERSION = '0.2.2';
 
 export class PiiGuardrails implements INodeType {
 	description: INodeTypeDescription = {
@@ -267,13 +267,19 @@ export class PiiGuardrails implements INodeType {
 						(acc: number, val: any) => acc + (typeof val === 'number' ? val : 0),
 						0,
 					);
+					const detectedEntities = Object.keys(interceptionCounts);
+					const findings = Object.entries(interceptionCounts).map(([type, count]) => ({
+						type,
+						count,
+					}));
 
 					returnData.push({
 						json: {
 							has_pii: totalEntities > 0,
 							entity_count: totalEntities,
 							interception_counts: interceptionCounts,
-							detected_entities: Object.keys(interceptionCounts),
+							detected_entities: detectedEntities,
+							findings,
 							text: scanText,
 						},
 						pairedItem: {
